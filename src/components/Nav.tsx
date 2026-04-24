@@ -35,6 +35,7 @@ const services = [
     ),
     iconBg: "bg-[#ECF7EF] text-[#0D7A5F]",
     title: "Repairs",
+    href: "/repair",
     desc: "Fix anything from a dodgy starter to a noisy clutch.",
   },
   {
@@ -45,6 +46,7 @@ const services = [
     ),
     iconBg: "bg-[#E6F3FA] text-[#066599]",
     title: "Diagnostics",
+    href: "/diagnostics",
     desc: "Warning light on? We'll tell you exactly what's up.",
   },
   {
@@ -91,7 +93,7 @@ export default function Nav() {
             {servicesOpen && (
               <div className="absolute top-[calc(100%+8px)] left-0 bg-white border border-[#DADCDB] rounded-xl shadow-[0_8px_24px_rgba(13,122,95,0.12),0_4px_8px_rgba(0,0,0,0.06)] min-w-[240px] p-2">
                 {services.map((s) => (
-                  <a key={s.title} href="#services" className="flex gap-3 items-start p-2.5 rounded-lg hover:bg-[#ECF7EF] transition-colors">
+                  <a key={s.title} href={"href" in s ? s.href : "#services"} className="flex gap-3 items-start p-2.5 rounded-lg hover:bg-[#ECF7EF] transition-colors">
                     <span className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${s.iconBg}`}>
                       {s.icon}
                     </span>
@@ -107,7 +109,7 @@ export default function Nav() {
 
           {["How It Works", "About Us", "Become a Mechanic", "Support"].map((label) => {
             const hrefs: Record<string, string> = {
-              "How It Works": "#how",
+              "How It Works": "/how-it-works",
               "About Us": "#about",
               "Become a Mechanic": "#mechanics",
               "Support": "#support",
@@ -144,7 +146,7 @@ export default function Nav() {
       {mobileOpen && (
         <div className="md:hidden border-t border-[#DADCDB] bg-white px-6 py-4 flex flex-col gap-2">
           <a href="#services" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Our Services</a>
-          <a href="#how" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>How It Works</a>
+          <a href="/how-it-works" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>How It Works</a>
           <a href="#about" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>About Us</a>
           <a href="#mechanics" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Become a Mechanic</a>
           <a href="#support" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Support</a>

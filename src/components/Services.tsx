@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const services = [
   {
     accent: "#0D7A5F",
@@ -11,6 +13,7 @@ const services = [
     desc: "Something not right? We fix the bumps, bangs, leaks and grumbles — big jobs and small — right where your car is parked.",
     bullets: ["Brakes, clutches, timing belts", "Battery, alternator, starter motor", "Suspension, exhaust, electrical"],
     cta: "Book a repair",
+    ctaHref: "/repair",
     num: "01",
   },
   {
@@ -88,10 +91,17 @@ export default function Services() {
                 ))}
               </ul>
 
-              <span className="inline-flex items-center gap-1.5 font-[family-name:var(--font-rubik)] font-semibold text-[12.5px] uppercase tracking-[0.06em] text-[#8A8D8C] group-hover:text-[var(--accent)] transition-colors">
-                {s.cta}
-                <span className="transition-transform duration-200 group-hover:translate-x-[3px]">→</span>
-              </span>
+              {"ctaHref" in s ? (
+                <Link href={s.ctaHref as string} className="inline-flex items-center gap-1.5 font-[family-name:var(--font-rubik)] font-semibold text-[12.5px] uppercase tracking-[0.06em] text-[#8A8D8C] group-hover:text-[var(--accent)] transition-colors">
+                  {s.cta}
+                  <span className="transition-transform duration-200 group-hover:translate-x-[3px]">→</span>
+                </Link>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 font-[family-name:var(--font-rubik)] font-semibold text-[12.5px] uppercase tracking-[0.06em] text-[#8A8D8C] group-hover:text-[var(--accent)] transition-colors">
+                  {s.cta}
+                  <span className="transition-transform duration-200 group-hover:translate-x-[3px]">→</span>
+                </span>
+              )}
 
               <span className="absolute right-[18px] bottom-[-14px] font-[family-name:var(--font-open-sans)] font-extrabold text-[108px] opacity-[0.04] leading-none select-none" style={{ color: s.accent }}>
                 {s.num}

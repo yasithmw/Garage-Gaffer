@@ -3,9 +3,10 @@
 interface QuoteWidgetProps {
   idSuffix?: string;
   darkBg?: boolean;
+  defaultService?: string;
 }
 
-export default function QuoteWidget({ idSuffix = "", darkBg = false }: QuoteWidgetProps) {
+export default function QuoteWidget({ idSuffix = "", darkBg = false, defaultService }: QuoteWidgetProps) {
   return (
     <form
       id={idSuffix ? undefined : "quote"}
@@ -76,6 +77,7 @@ export default function QuoteWidget({ idSuffix = "", darkBg = false }: QuoteWidg
           </svg>
           <select
             id={`service${idSuffix}`}
+            defaultValue={defaultService ?? ""}
             className="w-full bg-white border-[1.5px] border-[#DADCDB] rounded-lg pl-10 pr-9 py-3 text-[14px] text-[#1A1E1D] appearance-none hover:border-[#b0bab5] focus:outline-none focus:border-[#0D7A5F] focus:shadow-[0_0_0_3px_rgba(13,122,95,0.12)] transition-all"
             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23595C5B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 14px center" }}
           >
