@@ -4,19 +4,16 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import ServiceHero from "@/components/ServiceHero";
-import DiagnosticsMechanics from "@/components/diagnostics/DiagnosticsMechanics";
-import DiagnosticsFAQ from "@/components/diagnostics/DiagnosticsFAQ";
-import DiagnosticsProblemFinder from "@/components/diagnostics/DiagnosticsProblemFinder";
+import ServicingMechanics from "@/components/servicing/ServicingMechanics";
+import ServicingFAQ from "@/components/servicing/ServicingFAQ";
+import ServicingProblemFinder from "@/components/servicing/ServicingProblemFinder";
 
 export const metadata: Metadata = {
-  title: "Car Diagnostics in Bristol — Vetted Mechanics at Your Door | Garage Gaffer",
+  title: "Car Servicing in Bristol — Vetted Mechanics at Your Door | Garage Gaffer",
   description:
-    "Warning light on? Post your car problem and get a full diagnostic from a vetted Bristol mechanic — at your door. Plain-English report. Free to post.",
+    "Book an interim or full service from a vetted Bristol mechanic — they come to you. Manufacturer guidelines followed. 12-month workmanship warranty. Free to post.",
 };
 
-/* ─── Section 2 — Trust Strip icons ─────────────────────────── */
-
-/** Calendar (shield variant) icon for "12-month workmanship warranty" trust card */
 function CalendarTrustIcon() {
   return (
     <svg
@@ -38,7 +35,6 @@ function CalendarTrustIcon() {
   );
 }
 
-/** Shield icon for "DBS checked. Qualification verified." trust card */
 function ShieldTrustIcon() {
   return (
     <svg
@@ -56,7 +52,6 @@ function ShieldTrustIcon() {
   );
 }
 
-/** Document icon for "Insured on every job." trust card */
 function DocumentTrustIcon() {
   return (
     <svg
@@ -78,8 +73,6 @@ function DocumentTrustIcon() {
   );
 }
 
-/* ─── Section 2 — Trust Strip card data ─────────────────────── */
-/* Fixed content — identical across all service pages per diagnostics.md */
 const trustCards = [
   {
     icon: <CalendarTrustIcon />,
@@ -101,14 +94,11 @@ const trustCards = [
   },
 ];
 
-/* ─── Section 6 — Other Services card data ──────────────────── */
-/* Repairs + Servicing — exact <article> structure from Services.tsx */
 const otherServices = [
   {
     accent: "#0D7A5F",
     well: "#ECF7EF",
     icon: (
-      /* Wrench / repair icon — matches Services.tsx repair card */
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -122,21 +112,20 @@ const otherServices = [
       </svg>
     ),
     title: "Car repairs",
-    desc: "Know what's wrong and need it sorted? Get a fixed quote from a vetted Bristol mechanic — at your door.",
+    desc: "Something's broken and you know what it is? Get a fixed quote from a vetted Bristol mechanic — at your door.",
     bullets: [
       "Brakes, clutch, exhaust, suspension and more",
       "Fixed price upfront — no surprises after the job",
       "12-month workmanship warranty on every repair",
     ],
-    cta: "See repairs →",
-    ctaHref: "/repairs",
+    cta: "See repairs",
+    ctaHref: "/repair",
     num: "01",
   },
   {
-    accent: "#31A7A8",
-    well: "#E4F6F6",
+    accent: "#066599",
+    well: "#E6F3FA",
     icon: (
-      /* Sun / servicing icon — matches Services.tsx servicing card */
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -146,43 +135,40 @@ const otherServices = [
         className="w-[22px] h-[22px]"
         strokeWidth={1.8}
       >
-        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+        <path d="M12 3v2M12 19v2M3 12h2M19 12h2" />
       </svg>
     ),
-    title: "Car servicing",
-    desc: "Keep your car in good shape. Interim and full services from qualified Bristol mechanics, at your door.",
+    title: "Diagnostics",
+    desc: "Not sure what's wrong? Get a full diagnostic from a vetted Bristol mechanic and know exactly what needs doing before you commit to anything.",
     bullets: [
-      "Interim, full service, and timing belt",
-      "Manufacturer guidelines followed — won't void your warranty",
-      "Oil, filters, fluids, and everything in between",
+      "Full vehicle health check at your door",
+      "Plain-English report on what's wrong",
+      "Recommended next steps with no pressure",
     ],
-    cta: "See servicing →",
-    ctaHref: "/servicing",
-    num: "03",
+    cta: "Find out more",
+    ctaHref: "/diagnostics",
+    num: "02",
   },
 ];
 
-/* ─── Page ───────────────────────────────────────────────────── */
-
-export default function DiagnosticsPage() {
+export default function ServicingPage() {
   return (
     <>
       <ScrollReveal />
       <Nav />
       <main>
 
-        {/* ── Section 1 — Hero + QuoteWidget ──────────────────── */}
-        <ServiceHero 
-          breadcrumb={{ parent: "Services", current: "Car diagnostics · Bristol" }}
-          title={<>Warning light on? <em className="italic not-italic text-[#0D7A5F] bg-gradient-to-b from-transparent from-62% to-[rgba(13,122,95,0.15)] to-62% px-0.5 font-extrabold">Let&apos;s find out why.</em></>}
-          subtitle="Get a full diagnostic from a vetted Bristol mechanic — at your door. You'll get a plain-English report on exactly what's wrong, and what to do next."
+        <ServiceHero
+          breadcrumb={{ parent: "Services", current: "Car servicing · Bristol" }}
+          title={<>Keep your car in good shape. <em className="italic not-italic text-[#0D7A5F] bg-gradient-to-b from-transparent from-62% to-[rgba(13,122,95,0.15)] to-62% px-0.5 font-extrabold">Before it becomes a problem.</em></>}
+          subtitle="Book an interim or full service from a vetted Bristol mechanic — they come to you, work on your schedule, and keep your car running exactly as it should."
           meta={{ mechanicCount: 127, quoteTime: "7 mins" }}
-          defaultService="Diagnostic check"
-          idSuffix="diagnostics-hero"
+          defaultService="Full service"
+          idSuffix="servicing-hero"
         />
 
-        {/* ── Section 2 — Trust Strip ──────────────────────────── */}
-        {/* Flows directly below hero as credibility continuation — no section header */}
         <section className="bg-[#FBFDFC] border-t border-b border-[#DADCDB] py-16 md:py-12">
           <div className="max-w-[1200px] mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -192,10 +178,8 @@ export default function DiagnosticsPage() {
                   className="relative overflow-hidden bg-white border border-[#DADCDB] rounded-2xl p-7 min-h-[200px] flex flex-col shadow-[0_1px_3px_rgba(0,0,0,0.08)] group hover:-translate-y-[3px] hover:shadow-[0_8px_24px_rgba(13,122,95,0.12),0_4px_8px_rgba(0,0,0,0.06)] transition-all duration-200 reveal"
                   style={{ ["--accent" as string]: "#0D7A5F" }}
                 >
-                  {/* Top accent bar */}
                   <div className="absolute top-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-t-2xl" style={{ background: "#0D7A5F" }} />
 
-                  {/* Icon well — 44×44, radius-xl, brand-green */}
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center mb-[18px] border"
                     style={{ background: "#ECF7EF", borderColor: "color-mix(in srgb, #0D7A5F 15%, transparent)", color: "#0D7A5F" }}
@@ -210,7 +194,6 @@ export default function DiagnosticsPage() {
                     {card.body}
                   </p>
 
-                  {/* Decorative large numeral */}
                   <span
                     className="absolute right-[18px] bottom-[-14px] font-[family-name:var(--font-open-sans)] font-extrabold text-[108px] opacity-[0.04] leading-none select-none"
                     style={{ color: "#0D7A5F" }}
@@ -223,20 +206,14 @@ export default function DiagnosticsPage() {
           </div>
         </section>
 
-        {/* ── Section 3 — Top Mechanics (client component) ─────── */}
-        <DiagnosticsMechanics />
+        <ServicingMechanics />
 
-        {/* ── Section 4 — FAQ (client component) ───────────────── */}
-        <DiagnosticsFAQ />
+        <ServicingFAQ />
 
-        {/* ── Section 5 — Problem Finder + QuoteWidget ─────────── */}
-        <DiagnosticsProblemFinder />
+        <ServicingProblemFinder />
 
-        {/* ── Section 6 — Other Services ───────────────────────── */}
-        {/* Exact <article> structure from Services.tsx — 2-col desktop, 1-col mobile */}
         <section className="bg-[#FBFDFC] border-t border-b border-[#DADCDB] py-24 md:py-16">
           <div className="max-w-[1200px] mx-auto px-6">
-            {/* Section header */}
             <div className="max-w-[640px] mb-12 reveal">
               <span className="inline-block font-[family-name:var(--font-rubik)] text-[11px] font-bold tracking-[0.1em] uppercase text-[#0D7A5F] mb-3">
                 Our other services
@@ -253,13 +230,11 @@ export default function DiagnosticsPage() {
                   className="relative overflow-hidden bg-white border border-[#DADCDB] rounded-2xl p-7 min-h-[260px] flex flex-col shadow-[0_1px_3px_rgba(0,0,0,0.08)] group hover:-translate-y-[3px] hover:shadow-[0_8px_24px_rgba(13,122,95,0.12),0_4px_8px_rgba(0,0,0,0.06)] transition-all duration-200 reveal"
                   style={{ ["--accent" as string]: s.accent }}
                 >
-                  {/* Top accent bar — opacity 0 → 1 on hover, service-specific colour */}
                   <div
                     className="absolute top-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-t-2xl"
                     style={{ background: s.accent }}
                   />
 
-                  {/* Icon well — 44×44, radius-xl, service accent */}
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center mb-[18px] border"
                     style={{
@@ -271,17 +246,14 @@ export default function DiagnosticsPage() {
                     {s.icon}
                   </div>
 
-                  {/* Title — Open Sans 700 21px #1A1E1D */}
                   <h3 className="font-[family-name:var(--font-open-sans)] text-[21px] font-bold mb-2.5 text-[#1A1E1D]">
                     {s.title}
                   </h3>
 
-                  {/* Description — Rubik 400 14.5px #595C5B */}
                   <p className="text-[#595C5B] text-[14.5px] leading-[1.6] flex-grow mb-[18px]">
                     {s.desc}
                   </p>
 
-                  {/* Bullet list — coloured dot (#accent) + Rubik 13.5px #595C5B */}
                   <ul className="list-none p-0 mb-5 flex flex-col gap-0">
                     {s.bullets.map((b) => (
                       <li
@@ -297,7 +269,6 @@ export default function DiagnosticsPage() {
                     ))}
                   </ul>
 
-                  {/* CTA — Link, inherits Services.tsx pattern */}
                   <Link
                     href={s.ctaHref}
                     className="inline-flex items-center gap-1.5 font-[family-name:var(--font-rubik)] font-semibold text-[12.5px] uppercase tracking-[0.06em] text-[#8A8D8C] group-hover:text-[var(--accent)] transition-colors"
@@ -308,7 +279,6 @@ export default function DiagnosticsPage() {
                     </span>
                   </Link>
 
-                  {/* Decorative large numeral */}
                   <span
                     className="absolute right-[18px] bottom-[-14px] font-[family-name:var(--font-open-sans)] font-extrabold text-[108px] opacity-[0.04] leading-none select-none"
                     style={{ color: s.accent }}
@@ -323,7 +293,6 @@ export default function DiagnosticsPage() {
 
       </main>
 
-      {/* ── Section 7 — Footer ───────────────────────────────── */}
       <Footer />
     </>
   );

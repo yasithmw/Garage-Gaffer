@@ -3,7 +3,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import QuoteWidget from "@/components/QuoteWidget";
+import ServiceHero from "@/components/ServiceHero";
 import RepairMechanics from "@/components/repair/RepairMechanics";
 import RepairFAQ from "@/components/repair/RepairFAQ";
 import RepairProblemFinder from "@/components/repair/RepairProblemFinder";
@@ -82,18 +82,21 @@ function DocumentTrustIcon() {
 const trustCards = [
   {
     icon: <CalendarTrustIcon />,
-    headline: "12-month warranty",
-    body: "If something isn't right, it's covered for a year.",
+    headline: "12-month workmanship warranty.",
+    body: "If something isn't right with the work, it's covered for a year. No arguments, no small print.",
+    num: "01",
   },
   {
     icon: <ShieldTrustIcon />,
-    headline: "Checked & certified",
-    body: "Every mechanic is background-checked before they join.",
+    headline: "DBS checked. Qualification verified.",
+    body: "Every mechanic is background-checked and must show proof of their qualifications before appearing on the platform.",
+    num: "02",
   },
   {
     icon: <DocumentTrustIcon />,
-    headline: "Fully insured",
-    body: "Every job is covered. No exceptions.",
+    headline: "Insured on every job.",
+    body: "All mechanics carry public liability insurance. Every job on Garage Gaffer is covered.",
+    num: "03",
   },
 ];
 
@@ -170,101 +173,51 @@ export default function RepairPage() {
       <main>
 
         {/* ── Section 1 — Hero + QuoteWidget ──────────────────── */}
-        <section className="relative overflow-hidden bg-[#0A1412] py-20 md:py-14">
-          {/* Radial brand-green glows */}
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-            <div className="absolute w-[60%] h-[70%] top-[-10%] left-[-10%] bg-[radial-gradient(circle,rgba(13,122,95,0.18)_0%,transparent_60%)]" />
-            <div className="absolute w-[40%] h-[50%] bottom-0 right-0 bg-[radial-gradient(circle,rgba(13,122,95,0.08)_0%,transparent_65%)]" />
-          </div>
-
-          <div className="relative max-w-[1200px] mx-auto px-6">
-            {/* 2-column layout: left text, right widget */}
-            <div className="grid grid-cols-2 gap-14 items-center md:grid-cols-1 md:gap-10">
-
-              {/* Left column — text block */}
-              <div className="reveal">
-                {/* Eyebrow — Rubik 11px 700 uppercase brand-green */}
-                <span className="inline-block font-[family-name:var(--font-rubik)] text-[11px] font-bold tracking-[0.1em] uppercase text-[#0D7A5F] mb-3">
-                  Car repairs · Bristol
-                </span>
-
-                {/* H1 — Open Sans 800, 56px (≤960px → 40px) */}
-                <h1 className="font-[family-name:var(--font-open-sans)] text-[56px] md:text-[40px] font-extrabold leading-[1.05] tracking-[-1.5px] text-white mb-5">
-                  Something&apos;s wrong with your car. Let&apos;s sort it.
-                </h1>
-
-                {/* Subheadline — Rubik 400 17px rgba(255,255,255,0.75) */}
-                <p className="font-[family-name:var(--font-rubik)] text-[17px] leading-[1.6] text-white/75 mb-3">
-                  Post your problem, get quotes from vetted Bristol mechanics, and pick the one that works for you. They come to you.
-                </p>
-
-                {/* Body copy — Rubik 400 15px rgba(255,255,255,0.60) */}
-                <p className="font-[family-name:var(--font-rubik)] text-[15px] leading-[1.65] text-white/60 mb-8">
-                  You don&apos;t need to know exactly what&apos;s wrong. Describe what&apos;s happening — a noise, a warning light, something that doesn&apos;t feel right — and local mechanics will quote you directly.
-                </p>
-
-                {/* Trust badge pills — bg-white/8, border-white/12, rounded-full, tick SVG */}
-                <div className="flex flex-wrap gap-3">
-                  {[
-                    "Vetted mechanics only",
-                    "See the price before you commit",
-                    "12-month workmanship warranty",
-                  ].map((badge) => (
-                    <span
-                      key={badge}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/[0.08] border border-white/[0.12] rounded-full font-[family-name:var(--font-rubik)] text-[12.5px] text-white/70"
-                    >
-                      {/* Tick SVG — 14px, stroke 2, brand-green */}
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="w-3 h-3 text-[#0D7A5F] flex-shrink-0"
-                        aria-hidden="true"
-                      >
-                        <path d="M20 6L9 17l-5-5" />
-                      </svg>
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right column — QuoteWidget, pre-selected to "Repair a specific issue" */}
-              <div className="reveal">
-                <QuoteWidget
-                  idSuffix="repair-hero"
-                  defaultService="Repair a specific issue"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+        <ServiceHero 
+          breadcrumb={{ parent: "Services", current: "Car repairs · Bristol" }}
+          title={<>Something&apos;s wrong with your car. <em className="italic not-italic text-[#0D7A5F] bg-gradient-to-b from-transparent from-62% to-[rgba(13,122,95,0.15)] to-62% px-0.5 font-extrabold">Let&apos;s sort it.</em></>}
+          subtitle="Describe the noise, the warning light, or the feeling that's off. Vetted Bristol mechanics quote you direct — and come to you."
+          meta={{ mechanicCount: 127, quoteTime: "7 mins" }}
+          defaultService="Repair a specific issue"
+          idSuffix="repair-hero"
+        />
 
         {/* ── Section 2 — Trust Strip ──────────────────────────── */}
-        <section className="bg-white border-t border-[#DADCDB] py-8">
+        <section className="bg-[#FBFDFC] border-t border-b border-[#DADCDB] py-16 md:py-12">
           <div className="max-w-[1200px] mx-auto px-6">
-            <div className="grid grid-cols-3 gap-4 sm:grid-cols-1">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {trustCards.map((card) => (
-                <div
+                <article
                   key={card.headline}
-                  className="flex items-center gap-3 bg-[#FBFDFC] border border-[#DADCDB] rounded-xl px-4 py-3.5 reveal"
+                  className="relative overflow-hidden bg-white border border-[#DADCDB] rounded-2xl p-7 min-h-[200px] flex flex-col shadow-[0_1px_3px_rgba(0,0,0,0.08)] group hover:-translate-y-[3px] hover:shadow-[0_8px_24px_rgba(13,122,95,0.12),0_4px_8px_rgba(0,0,0,0.06)] transition-all duration-200 reveal"
+                  style={{ ["--accent" as string]: "#0D7A5F" }}
                 >
-                  <span className="w-9 h-9 rounded-lg bg-[#ECF7EF] text-[#0D7A5F] flex items-center justify-center flex-shrink-0">
+                  {/* Top accent bar */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-t-2xl" style={{ background: "#0D7A5F" }} />
+
+                  {/* Icon well — 44×44, radius-xl, brand-green */}
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-[18px] border"
+                    style={{ background: "#ECF7EF", borderColor: "color-mix(in srgb, #0D7A5F 15%, transparent)", color: "#0D7A5F" }}
+                  >
                     {card.icon}
-                  </span>
-                  <div>
-                    <p className="font-[family-name:var(--font-open-sans)] text-[14px] font-bold text-[#1A1E1D] leading-[1.3]">
-                      {card.headline}
-                    </p>
-                    <p className="font-[family-name:var(--font-rubik)] text-[12.5px] text-[#595C5B] leading-[1.5] mt-0.5">
-                      {card.body}
-                    </p>
                   </div>
-                </div>
+
+                  <h3 className="font-[family-name:var(--font-open-sans)] text-[21px] font-bold mb-2.5 text-[#1A1E1D]">
+                    {card.headline}
+                  </h3>
+                  <p className="text-[#595C5B] text-[14.5px] leading-[1.6] flex-grow">
+                    {card.body}
+                  </p>
+
+                  {/* Decorative large numeral */}
+                  <span
+                    className="absolute right-[18px] bottom-[-14px] font-[family-name:var(--font-open-sans)] font-extrabold text-[108px] opacity-[0.04] leading-none select-none"
+                    style={{ color: "#0D7A5F" }}
+                  >
+                    {card.num}
+                  </span>
+                </article>
               ))}
             </div>
           </div>
@@ -281,7 +234,7 @@ export default function RepairPage() {
 
         {/* ── Section 6 — Other Services ───────────────────────── */}
         {/* Exact <article> structure from Services.tsx — 2-col desktop, 1-col mobile */}
-        <section className="bg-[#FBFDFC] border-t border-[#DADCDB] py-24 md:py-16">
+        <section className="bg-[#FBFDFC] border-t border-b border-[#DADCDB] py-24 md:py-16">
           <div className="max-w-[1200px] mx-auto px-6">
             {/* Section header */}
             <div className="max-w-[640px] mb-12 reveal">
@@ -293,8 +246,7 @@ export default function RepairPage() {
               </h2>
             </div>
 
-            {/* 2-col grid — matches Services.tsx pattern */}
-            <div className="grid grid-cols-2 gap-5 md:grid-cols-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {otherServices.map((s) => (
                 <article
                   key={s.num}

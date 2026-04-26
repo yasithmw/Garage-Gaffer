@@ -2,11 +2,10 @@
 
 interface QuoteWidgetProps {
   idSuffix?: string;
-  darkBg?: boolean;
   defaultService?: string;
 }
 
-export default function QuoteWidget({ idSuffix = "", darkBg = false, defaultService }: QuoteWidgetProps) {
+export default function QuoteWidget({ idSuffix = "", defaultService }: QuoteWidgetProps) {
   return (
     <form
       id={idSuffix ? undefined : "quote"}
