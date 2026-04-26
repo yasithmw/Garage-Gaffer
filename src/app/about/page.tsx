@@ -3,82 +3,13 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import AboutHero from "@/components/about/AboutHero";
 
 export const metadata: Metadata = {
   title: "About Us — Garage Gaffer | Bristol's Vetted Mechanic Marketplace",
   description:
     "We're a small Bristol team that got tired of the way finding a mechanic works. Garage Gaffer connects drivers with vetted local mobile mechanics — honest quotes, transparent vetting, no jargon.",
 };
-
-/* ─── Inline SVG icons — Vetting section ────────────────────── */
-
-const ShieldIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-[24px] h-[24px]"
-    aria-hidden="true"
-  >
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-  </svg>
-);
-
-const CertificateIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-[24px] h-[24px]"
-    aria-hidden="true"
-  >
-    <circle cx="12" cy="8" r="6" />
-    <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
-  </svg>
-);
-
-const DocumentIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-[24px] h-[24px]"
-    aria-hidden="true"
-  >
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-    <polyline points="14 2 14 8 20 8" />
-    <line x1="16" y1="13" x2="8" y2="13" />
-    <line x1="16" y1="17" x2="8" y2="17" />
-  </svg>
-);
-
-const CalendarIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-[24px] h-[24px]"
-    aria-hidden="true"
-  >
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-    <line x1="16" y1="2" x2="16" y2="6" />
-    <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-    <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" />
-  </svg>
-);
 
 /* ─── Inline SVG icons — Services section ────────────────────── */
 
@@ -128,61 +59,10 @@ const SunIcon = () => (
 
 /* ─── Section data ───────────────────────────────────────────── */
 
-const vetCards = [
-  {
-    icon: <ShieldIcon />,
-    headline: "DBS checked.",
-    body: "Every mechanic undergoes a Disclosure and Barring Service check before they can take jobs on the platform. We see the result. If it's not clean, they don't appear.",
-  },
-  {
-    icon: <CertificateIcon />,
-    headline: "Qualifications verified.",
-    body: "Mechanics must provide proof of their qualifications — City & Guilds, IMI, or equivalent — before appearing on the platform. We don't take their word for it.",
-  },
-  {
-    icon: <DocumentIcon />,
-    headline: "Public liability insurance confirmed.",
-    body: "Every mechanic on Garage Gaffer holds their own public liability insurance. We confirm this before they take a job. If something goes wrong, it's covered.",
-  },
-  {
-    icon: <CalendarIcon />,
-    headline: "12-month workmanship warranty.",
-    body: "All work booked through Garage Gaffer carries a 12-month workmanship warranty. If something isn't right with the job itself, it's covered — no arguments, no small print.",
-  },
-];
-
 const postcodes = [
   "BS1", "BS2", "BS3", "BS4", "BS5", "BS6", "BS7", "BS8", "BS9", "BS10",
   "BS11", "BS13", "BS14", "BS15", "BS16", "BS30", "BS31", "BS32", "BS34",
   "BS36", "BS37",
-];
-
-const wontDoItems = [
-  {
-    headline: "We don't take a cut from your quote.",
-    clarifier:
-      "What you're quoted is what the mechanic charges. We don't add a margin on top of their price.",
-  },
-  {
-    headline: "We don't list mechanics we haven't checked.",
-    clarifier:
-      "If a mechanic hasn't passed our vetting process, they don't appear on the platform. There's no paid listing, no 'boost your visibility' tier.",
-  },
-  {
-    headline: "We don't hide who's doing the job.",
-    clarifier:
-      "Every quote comes from a named, identifiable mechanic with a real profile. You know who's coming before you book.",
-  },
-  {
-    headline: "We don't operate nationally.",
-    clarifier:
-      "We're Bristol. Specifically Bristol. We don't have a version of this in twelve cities where no one knows who the mechanics are. When we expand, we'll vet each city properly.",
-  },
-  {
-    headline: "We don't take sides if something goes wrong.",
-    clarifier:
-      "If there's a dispute, we'll look into it properly. We're not going to tell you to 'take it up with the mechanic' and disappear. The 12-month workmanship warranty exists because we want there to be a clear route to resolution.",
-  },
 ];
 
 /* Exact same <article> structure as Services.tsx */
@@ -266,28 +146,7 @@ export default function AboutPage() {
       <ScrollReveal />
       <Nav />
       <main>
-
-        {/* ── Section 1 — Hero ─────────────────────────────────── */}
-        <section className="relative overflow-hidden bg-[#0A1412] py-[88px] pb-[104px] md:py-16 md:pb-20">
-          {/* Subtle single radial glow — quieter than service pages */}
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-            <div className="absolute w-[60%] h-[90%] top-[-10%] left-1/2 -translate-x-1/2 bg-[radial-gradient(circle,rgba(13,122,95,0.38)_0%,transparent_60%)] opacity-40" />
-          </div>
-
-          <div className="relative max-w-[1200px] mx-auto px-6 text-center">
-            <div className="max-w-[760px] mx-auto reveal">
-              <span className="inline-block font-[family-name:var(--font-rubik)] text-[11px] font-bold tracking-[0.1em] uppercase text-[#0D7A5F] mb-5">
-                About Garage Gaffer
-              </span>
-              <h1 className="font-[family-name:var(--font-open-sans)] text-[52px] md:text-[38px] font-extrabold leading-[1.05] tracking-[-1.5px] md:tracking-[-1px] text-white mb-5">
-                We&apos;re a small Bristol team that got tired of the way finding a mechanic works.
-              </h1>
-              <p className="text-[17px] md:text-[16px] leading-[1.65] text-white/70 max-w-[560px] mx-auto">
-                So we built something that fixes the worst parts of it.
-              </p>
-            </div>
-          </div>
-        </section>
+        <AboutHero />
 
         {/* ── Section 2 — The Problem We Saw ───────────────────── */}
         <section className="bg-white py-24 md:py-16">
@@ -323,143 +182,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ── Section 3 — What We Actually Do ──────────────────── */}
-        <section className="bg-[#F5F7F6] border-t border-[#DADCDB] py-24 md:py-16">
-          <div className="max-w-[1200px] mx-auto px-6">
-            <div className="max-w-[560px] mx-auto text-center mb-14 reveal">
-              <span className="inline-block font-[family-name:var(--font-rubik)] text-[11px] font-bold tracking-[0.1em] uppercase text-[#0D7A5F] mb-3">
-                How it works
-              </span>
-              <h2 className="font-[family-name:var(--font-open-sans)] text-[34px] font-extrabold leading-[1.15] tracking-[-0.5px] text-[#1A1E1D]">
-                We&apos;re a marketplace. Here&apos;s the plain version.
-              </h2>
-            </div>
-
-            {/* 3-step row */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-
-              {/* Step 1 */}
-              <div className="relative bg-white border border-[#DADCDB] rounded-2xl p-7 shadow-[0_1px_3px_rgba(0,0,0,0.08)] reveal">
-                {/* Connector line — desktop only, between steps 1→2 */}
-                <div
-                  className="hidden md:block absolute top-[52px] right-[-24px] w-12 border-t border-dashed border-[rgba(13,122,95,0.3)] z-10"
-                  aria-hidden="true"
-                />
-                {/* Large decorative numeral */}
-                <span
-                  className="font-[family-name:var(--font-open-sans)] text-[80px] font-extrabold leading-none select-none block mb-1"
-                  style={{ color: "rgba(13,122,95,0.12)" }}
-                  aria-hidden="true"
-                >
-                  01
-                </span>
-                <h3 className="font-[family-name:var(--font-open-sans)] text-[18px] font-bold leading-[1.25] mb-2.5 text-[#1A1E1D]">
-                  You post your job
-                </h3>
-                <p className="text-[14.5px] leading-[1.65] text-[#595C5B]">
-                  Tell us what&apos;s happening with your car and where you&apos;re based. Takes under two minutes. No card needed.
-                </p>
-              </div>
-
-              {/* Step 2 */}
-              <div className="relative bg-white border border-[#DADCDB] rounded-2xl p-7 shadow-[0_1px_3px_rgba(0,0,0,0.08)] reveal">
-                {/* Connector line — desktop only, between steps 2→3 */}
-                <div
-                  className="hidden md:block absolute top-[52px] right-[-24px] w-12 border-t border-dashed border-[rgba(13,122,95,0.3)] z-10"
-                  aria-hidden="true"
-                />
-                <span
-                  className="font-[family-name:var(--font-open-sans)] text-[80px] font-extrabold leading-none select-none block mb-1"
-                  style={{ color: "rgba(13,122,95,0.12)" }}
-                  aria-hidden="true"
-                >
-                  02
-                </span>
-                <h3 className="font-[family-name:var(--font-open-sans)] text-[18px] font-bold leading-[1.25] mb-2.5 text-[#1A1E1D]">
-                  Vetted mechanics quote
-                </h3>
-                <p className="text-[14.5px] leading-[1.65] text-[#595C5B]">
-                  Bristol mechanics who&apos;ve passed our checks see your job and send an itemised price. You see who they are, their ratings, and their qualifications before you commit.
-                </p>
-              </div>
-
-              {/* Step 3 */}
-              <div className="relative bg-white border border-[#DADCDB] rounded-2xl p-7 shadow-[0_1px_3px_rgba(0,0,0,0.08)] reveal">
-                <span
-                  className="font-[family-name:var(--font-open-sans)] text-[80px] font-extrabold leading-none select-none block mb-1"
-                  style={{ color: "rgba(13,122,95,0.12)" }}
-                  aria-hidden="true"
-                >
-                  03
-                </span>
-                <h3 className="font-[family-name:var(--font-open-sans)] text-[18px] font-bold leading-[1.25] mb-2.5 text-[#1A1E1D]">
-                  You pick one and they come to you
-                </h3>
-                <p className="text-[14.5px] leading-[1.65] text-[#595C5B]">
-                  Choose the mechanic that suits you — on price, reviews, or availability. They turn up at your door. You don&apos;t move the car.
-                </p>
-              </div>
-
-            </div>
-
-            {/* Microcopy beneath steps */}
-            <p className="font-[family-name:var(--font-rubik)] text-[13.5px] text-[#595C5B] text-center reveal">
-              Free to post &middot; No commitment until you book &middot; Same-day slots available
-            </p>
-          </div>
-        </section>
-
-        {/* ── Section 4 — How We Vet Mechanics ─────────────────── */}
-        <section className="bg-white border-t border-[#DADCDB] py-24 md:py-16">
-          <div className="max-w-[1200px] mx-auto px-6">
-            <div className="max-w-[640px] mx-auto text-center mb-12 reveal">
-              <span className="inline-block font-[family-name:var(--font-rubik)] text-[11px] font-bold tracking-[0.1em] uppercase text-[#0D7A5F] mb-3">
-                How we check our mechanics
-              </span>
-              <h2 className="font-[family-name:var(--font-open-sans)] text-[34px] font-extrabold leading-[1.15] tracking-[-0.5px] mb-3 text-[#1A1E1D]">
-                Every mechanic is checked before they take a job.
-              </h2>
-              <p className="font-[family-name:var(--font-rubik)] text-[16px] leading-[1.7] text-[#595C5B]">
-                Not at sign-up — before their first job on the platform. Here&apos;s what that actually involves.
-              </p>
-            </div>
-
-            {/* 2×2 icon-well grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-              {vetCards.map((card) => (
-                <article
-                  key={card.headline}
-                  className="bg-white border border-[#DADCDB] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_24px_rgba(13,122,95,0.12),0_4px_8px_rgba(0,0,0,0.06)] hover:-translate-y-[3px] transition-all duration-200 reveal"
-                >
-                  {/* Icon well — 48×48, brand-green */}
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 border"
-                    style={{
-                      background: "#ECF7EF",
-                      borderColor: "color-mix(in srgb, #0D7A5F 15%, transparent)",
-                      color: "#0D7A5F",
-                    }}
-                  >
-                    {card.icon}
-                  </div>
-                  <h3 className="font-[family-name:var(--font-open-sans)] text-[16px] font-bold leading-[1.3] mb-2 text-[#1A1E1D]">
-                    {card.headline}
-                  </h3>
-                  <p className="font-[family-name:var(--font-rubik)] text-[13.5px] leading-[1.6] text-[#595C5B]">
-                    {card.body}
-                  </p>
-                </article>
-              ))}
-            </div>
-
-            {/* Supporting copy below grid */}
-            <p className="font-[family-name:var(--font-rubik)] text-[14px] text-[#595C5B] max-w-[600px] mx-auto text-center reveal">
-              We&apos;re not a directory. Anyone can pay to appear in a directory. We check every mechanic individually, and we take responsibility for who&apos;s on the platform.
-            </p>
-          </div>
-        </section>
-
-        {/* ── Section 5 — Where We Operate ─────────────────────── */}
+        {/* ── Section 3 — Where We Operate ─────────────────────── */}
         <section className="bg-[#F5F7F6] border-t border-[#DADCDB] py-24 md:py-16">
           <div className="max-w-[680px] mx-auto px-6">
             <div className="text-center mb-8 reveal">
@@ -505,7 +228,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ── Section 6 — Who's Behind It ──────────────────────── */}
+        {/* ── Section 4 — Who's Behind It ──────────────────────── */}
         <section className="bg-white border-t border-[#DADCDB] py-24 md:py-16">
           <div className="max-w-[640px] mx-auto px-6">
             <div className="reveal">
@@ -535,52 +258,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ── Section 7 — What We Won't Do ─────────────────────── */}
-        <section className="bg-[#F5F7F6] border-t border-[#DADCDB] py-24 md:py-16">
-          <div className="max-w-[680px] mx-auto px-6">
-            <div className="reveal">
-              <span className="inline-block font-[family-name:var(--font-rubik)] text-[11px] font-bold tracking-[0.1em] uppercase text-[#0D7A5F] mb-3">
-                What we don&apos;t do
-              </span>
-              <h2 className="font-[family-name:var(--font-open-sans)] text-[34px] font-extrabold leading-[1.15] tracking-[-0.5px] mb-4 text-[#1A1E1D]">
-                A few things we&apos;ve deliberately left out.
-              </h2>
-              <p className="font-[family-name:var(--font-rubik)] text-[16px] leading-[1.7] text-[#595C5B] mb-10">
-                These are things a lot of platforms do. We don&apos;t, and we won&apos;t.
-              </p>
-            </div>
-
-            <ul className="flex flex-col gap-7" role="list">
-              {wontDoItems.map((item) => (
-                <li key={item.headline} className="flex gap-4 items-start reveal">
-                  {/* × marker — aria-hidden, decorative only */}
-                  <span
-                    className="font-[family-name:var(--font-open-sans)] font-extrabold text-[18px] leading-[1.4] flex-shrink-0 select-none"
-                    style={{ color: "#0D7A5F" }}
-                    aria-hidden="true"
-                  >
-                    ×
-                  </span>
-                  <div>
-                    <p className="font-[family-name:var(--font-rubik)] text-[15px] font-medium text-[#1A1E1D] mb-1">
-                      {item.headline}
-                    </p>
-                    <p className="font-[family-name:var(--font-rubik)] text-[13.5px] leading-[1.65] text-[#595C5B]">
-                      {item.clarifier}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            {/* Closing line */}
-            <p className="font-[family-name:var(--font-rubik)] text-[14px] text-[#595C5B] text-center mt-10 reveal">
-              We&apos;re not claiming to be perfect. We&apos;re claiming to be honest about it when we&apos;re not.
-            </p>
-          </div>
-        </section>
-
-        {/* ── Section 8 — Our Services ──────────────────────────── */}
+        {/* ── Section 5 — Our Services ──────────────────────────── */}
         {/* Exact <article> structure from Services.tsx — 3-col desktop, 2-col tablet, 1-col mobile */}
         <section className="bg-[#FBFDFC] border-t border-b border-[#DADCDB] py-24 md:py-16">
           <div className="max-w-[1200px] mx-auto px-6">

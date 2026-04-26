@@ -42,10 +42,8 @@ export default function DiagnosticsFAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    /* bg-[#FBFDFC] matches repair FAQ pattern — alternating surface */
     <section className="bg-[#FBFDFC] border-t border-[#DADCDB] py-24 md:py-16">
       <div className="max-w-[1200px] mx-auto px-6">
-        {/* Section header — centred, max-w-560px, brand-green eyebrow */}
         <div className="max-w-[560px] mx-auto text-center mb-12 reveal">
           <span className="inline-block font-[family-name:var(--font-rubik)] text-[11px] font-bold tracking-[0.1em] uppercase text-[#0D7A5F] mb-3">
             Common questions
@@ -55,7 +53,6 @@ export default function DiagnosticsFAQ() {
           </h2>
         </div>
 
-        {/* Accordion — max-w-760px, FAQPage schema microdata */}
         <div
           className="max-w-[760px] mx-auto flex flex-col gap-3"
           itemScope
@@ -64,7 +61,7 @@ export default function DiagnosticsFAQ() {
           {faqs.map((faq, i) => (
             <div
               key={i}
-              className={`bg-white border rounded-2xl px-5 overflow-hidden transition-all duration-200 reveal ${
+              className={`bg-white border rounded-2xl px-6 overflow-hidden transition-all duration-300 reveal ${
                 open === i
                   ? "border-[#0D7A5F] shadow-[0_4px_12px_rgba(13,122,95,0.08)]"
                   : "border-[#DADCDB] hover:border-[#b0bab5]"
@@ -74,17 +71,14 @@ export default function DiagnosticsFAQ() {
               itemType="https://schema.org/Question"
             >
               <button
-                className="w-full flex justify-between items-center gap-4 py-4 text-left font-[family-name:var(--font-open-sans)] font-bold text-[16px] text-[#1A1E1D]"
+                className="w-full flex justify-between items-center gap-4 py-5 text-left font-[family-name:var(--font-open-sans)] font-bold text-[16px] text-[#1A1E1D]"
                 onClick={() => setOpen(open === i ? null : i)}
                 aria-expanded={open === i}
               >
                 <span itemProp="name">{faq.q}</span>
-                {/* Plus icon — rotates to × on expand via rotate-45 */}
                 <span
-                  className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
-                    open === i
-                      ? "bg-[#0D7A5F] text-white rotate-45"
-                      : "bg-[#ECF7EF] text-[#0D7A5F]"
+                  className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                    open === i ? "bg-[#0D7A5F] text-white rotate-45" : "bg-[#ECF7EF] text-[#0D7A5F]"
                   }`}
                 >
                   <svg
@@ -101,21 +95,28 @@ export default function DiagnosticsFAQ() {
                 </span>
               </button>
 
-              {open === i && (
-                <div
-                  className="pb-5 text-[14.5px] leading-[1.7] text-[#595C5B]"
-                  itemScope
-                  itemProp="acceptedAnswer"
-                  itemType="https://schema.org/Answer"
-                >
-                  <span itemProp="text">{faq.a}</span>
+              <div 
+                className="grid transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                style={{ 
+                  gridTemplateRows: open === i ? "1fr" : "0fr",
+                  opacity: open === i ? 1 : 0
+                }}
+                itemScope
+                itemProp="acceptedAnswer"
+                itemType="https://schema.org/Answer"
+              >
+                <div className="overflow-hidden">
+                  <div className="pb-5">
+                    <p className="font-[family-name:var(--font-rubik)] text-[14.5px] leading-[1.7] text-[#595C5B]" itemProp="text">
+                      {faq.a}
+                    </p>
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Help centre link — placeholder href confirmed before launch */}
         <p className="text-center mt-10 text-[14.5px] text-[#595C5B] reveal">
           More questions?{" "}
           <a

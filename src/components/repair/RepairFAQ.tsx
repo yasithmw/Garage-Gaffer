@@ -25,11 +25,11 @@ const faqs = [
   },
   {
     q: "What if something goes wrong after the repair?",
-    a: "All work comes with a 12-month workmanship warranty. If there's a problem with the work itself, it's covered. Get in touch and we'll sort it out.",
+    a: "All work comes with a 12-month workmanship warranty. If there's a problem with what was done, get in touch and we'll sort it out.",
   },
   {
     q: "Do you cover my area of Bristol?",
-    a: "We cover Bristol and the surrounding areas — Clifton, Southville, Redland, Bedminster, Stoke Bishop, Bishopston, and more. Enter your postcode when you post your job and we'll show you who's nearby.",
+    a: "We cover Bristol and the surrounding areas — Clifton, Southville, Redland, Bedminster, Stoke Bishop, Bishopston, and more. Enter your postcode when you post your job and we'll show you who&apos;s nearby.",
   },
   {
     q: "Is it really free to post a job?",
@@ -62,7 +62,7 @@ export default function RepairFAQ() {
           {faqs.map((faq, i) => (
             <div
               key={i}
-              className={`bg-white border rounded-2xl px-5 overflow-hidden transition-all duration-200 reveal ${
+              className={`bg-white border rounded-2xl px-5 overflow-hidden transition-all duration-300 reveal ${
                 open === i
                   ? "border-[#0D7A5F] shadow-[0_4px_12px_rgba(13,122,95,0.08)]"
                   : "border-[#DADCDB] hover:border-[#b0bab5]"
@@ -78,7 +78,7 @@ export default function RepairFAQ() {
               >
                 <span itemProp="name">{faq.q}</span>
                 <span
-                  className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                  className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                     open === i
                       ? "bg-[#0D7A5F] text-white rotate-45"
                       : "bg-[#ECF7EF] text-[#0D7A5F]"
@@ -97,16 +97,24 @@ export default function RepairFAQ() {
                 </span>
               </button>
 
-              {open === i && (
-                <div
-                  className="pb-5 text-[14.5px] leading-[1.7] text-[#595C5B]"
-                  itemScope
-                  itemProp="acceptedAnswer"
-                  itemType="https://schema.org/Answer"
-                >
-                  <span itemProp="text">{faq.a}</span>
+              <div 
+                className="grid transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                style={{ 
+                  gridTemplateRows: open === i ? "1fr" : "0fr",
+                  opacity: open === i ? 1 : 0
+                }}
+                itemScope
+                itemProp="acceptedAnswer"
+                itemType="https://schema.org/Answer"
+              >
+                <div className="overflow-hidden">
+                  <div className="pb-5">
+                    <p className="font-[family-name:var(--font-rubik)] text-[14.5px] leading-[1.7] text-[#595C5B]" itemProp="text">
+                      {faq.a}
+                    </p>
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>

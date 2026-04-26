@@ -3,6 +3,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import HowItWorksFAQ from "@/components/how-it-works/HowItWorksFAQ";
+import HowItWorksHero from "@/components/how-it-works/HowItWorksHero";
 
 export const metadata: Metadata = {
   title: "How It Works — Garage Gaffer | Vetted Bristol Mechanics at Your Door",
@@ -18,19 +19,28 @@ const ShieldIcon = () => (
   </svg>
 );
 
-const TagIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
-    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-    <line x1="7" y1="7" x2="7.01" y2="7" />
-  </svg>
-);
-
 const DocumentIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
     <polyline points="14 2 14 8 20 8" />
     <line x1="16" y1="13" x2="8" y2="13" />
     <line x1="16" y1="17" x2="8" y2="17" />
+  </svg>
+);
+
+const CertificateIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="w-[24px] h-[24px]"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="8" r="6" />
+    <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
   </svg>
 );
 
@@ -98,26 +108,26 @@ const timelineBeats = [
   },
 ];
 
-const trustBlocks = [
+const vetCards = [
   {
     icon: <ShieldIcon />,
-    headline: "Vetted, not just registered.",
-    body: "Every mechanic is DBS-checked and must show proof of their qualifications before they appear on the platform. Not a directory — a checked roster.",
+    headline: "DBS checked.",
+    body: "Every mechanic undergoes a Disclosure and Barring Service check before they can take jobs on the platform. We see the result. If it's not clean, they don't appear.",
   },
   {
-    icon: <TagIcon />,
-    headline: "You see the price first.",
-    body: "Every quote shows labour, parts, and VAT broken out. What you're quoted is what you pay. If anything changes mid-job, your mechanic asks before touching it.",
+    icon: <CertificateIcon />,
+    headline: "Qualifications verified.",
+    body: "Mechanics must provide proof of their qualifications — City & Guilds, IMI, or equivalent — before appearing on the platform. We don't take their word for it.",
   },
   {
     icon: <DocumentIcon />,
-    headline: "Insured on every job.",
-    body: "All mechanics carry their own public liability insurance. Every job on Garage Gaffer is covered.",
+    headline: "Public liability insurance confirmed.",
+    body: "Every mechanic on Garage Gaffer holds their own public liability insurance. We confirm this before they take a job. If something goes wrong, it's covered.",
   },
   {
     icon: <CalendarIcon />,
     headline: "12-month workmanship warranty.",
-    body: "If something isn't right with the work, it's covered for a year. No arguments, no small print.",
+    body: "All work booked through Garage Gaffer carries a 12-month workmanship warranty. If something isn't right with the job itself, it's covered — no arguments, no small print.",
   },
 ];
 
@@ -150,44 +160,7 @@ export default function HowItWorksPage() {
       <ScrollReveal />
       <Nav />
       <main>
-        {/* ── Section 1: Hero ─────────────────────────────────── */}
-        <section className="relative overflow-hidden bg-[#0A1412] py-[80px] pb-[96px] md:py-14 md:pb-16">
-          {/* Subtle green radial glow */}
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-            <div className="absolute w-[55%] h-[80%] top-[-15%] right-[-5%] bg-[radial-gradient(circle,rgba(13,122,95,0.15)_0%,transparent_60%)]" />
-            <div className="absolute w-[35%] h-[50%] bottom-0 left-0 bg-[radial-gradient(circle,rgba(13,122,95,0.08)_0%,transparent_65%)]" />
-          </div>
-
-          <div className="relative max-w-[1200px] mx-auto px-6 text-center">
-            <div className="max-w-[720px] mx-auto reveal">
-              <span className="inline-block font-[family-name:var(--font-rubik)] text-[11px] font-bold tracking-[0.1em] uppercase text-[#0D7A5F] mb-5">
-                How it works
-              </span>
-              <h1 className="font-[family-name:var(--font-open-sans)] text-[52px] md:text-[38px] font-extrabold leading-[1.05] tracking-[-1.5px] md:tracking-[-1px] text-white mb-5">
-                Simple. Fast.{" "}
-                <span className="text-[#0D7A5F]">They come to you.</span>
-              </h1>
-              <p className="text-[18px] md:text-[16px] leading-[1.65] text-white/70 mb-8 max-w-[580px] mx-auto">
-                Post your car problem, get quotes from vetted Bristol mechanics,
-                and pick the one that suits you. The whole thing takes minutes —
-                and you don&apos;t move an inch.
-              </p>
-
-              <div className="flex flex-col items-center gap-3">
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 px-7 py-[14px] bg-[#0D7A5F] text-white font-[family-name:var(--font-rubik)] font-semibold text-[15px] rounded-xl shadow-[0_2px_8px_rgba(13,122,95,0.35)] hover:bg-[#055240] hover:shadow-[0_6px_20px_rgba(13,122,95,0.4)] hover:-translate-y-px active:translate-y-px transition-all"
-                >
-                  Get quotes
-                  <ArrowIcon />
-                </a>
-                <span className="text-[13px] text-white/45">
-                  Free to post &middot; No card needed to see quotes
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
+        <HowItWorksHero />
 
         {/* ── Section 2: The Three Steps ───────────────────────── */}
         <section className="bg-[#F5F7F6] py-24 md:py-16">
@@ -305,46 +278,52 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        {/* ── Section 4: Why It Works (Trust Layer) ────────────── */}
+        {/* ── Section 4: How We Check Our Mechanics ────────────── */}
         <section className="bg-[#F5F7F6] border-t border-[#DADCDB] py-24 md:py-16">
           <div className="max-w-[1200px] mx-auto px-6">
-            <div className="max-w-[560px] mx-auto text-center mb-12 reveal">
+            <div className="max-w-[640px] mx-auto text-center mb-12 reveal">
               <span className="inline-block font-[family-name:var(--font-rubik)] text-[11px] font-bold tracking-[0.1em] uppercase text-[#0D7A5F] mb-3">
-                Why trust the process
+                How we check our mechanics
               </span>
-              <h2 className="font-[family-name:var(--font-open-sans)] text-[34px] font-extrabold leading-[1.15] tracking-[-0.5px] mb-3">
-                We&apos;ve done the hard bit.
+              <h2 className="font-[family-name:var(--font-open-sans)] text-[34px] font-extrabold leading-[1.15] tracking-[-0.5px] mb-3 text-[#1A1E1D]">
+                Every mechanic is checked before they take a job.
               </h2>
-              <p className="text-[#595C5B] text-[16px] leading-[1.7]">
-                Every mechanic on Garage Gaffer is vetted before they take a
-                job. Here&apos;s what that means for you.
+              <p className="font-[family-name:var(--font-rubik)] text-[16px] leading-[1.7] text-[#595C5B]">
+                Not at sign-up — before their first job on the platform. Here&apos;s what that actually involves.
               </p>
             </div>
 
-            {/* 2×2 / 4-col grid */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-8">
-              {trustBlocks.map((block) => (
-                <div
-                  key={block.headline}
+            {/* 2×2 icon-well grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+              {vetCards.map((card) => (
+                <article
+                  key={card.headline}
                   className="bg-white border border-[#DADCDB] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_24px_rgba(13,122,95,0.12),0_4px_8px_rgba(0,0,0,0.06)] hover:-translate-y-[3px] transition-all duration-200 reveal"
                 >
-                  <span className="w-11 h-11 rounded-xl bg-[#ECF7EF] text-[#0D7A5F] flex items-center justify-center mb-4">
-                    {block.icon}
-                  </span>
+                  {/* Icon well — 48×48, brand-green */}
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 border"
+                    style={{
+                      background: "#ECF7EF",
+                      borderColor: "color-mix(in srgb, #0D7A5F 15%, transparent)",
+                      color: "#0D7A5F",
+                    }}
+                  >
+                    {card.icon}
+                  </div>
                   <h3 className="font-[family-name:var(--font-open-sans)] text-[16px] font-bold leading-[1.3] mb-2 text-[#1A1E1D]">
-                    {block.headline}
+                    {card.headline}
                   </h3>
-                  <p className="text-[13.5px] leading-[1.6] text-[#595C5B]">
-                    {block.body}
+                  <p className="font-[family-name:var(--font-rubik)] text-[13.5px] leading-[1.6] text-[#595C5B]">
+                    {card.body}
                   </p>
-                </div>
+                </article>
               ))}
             </div>
 
-            {/* Supporting copy */}
-            <p className="text-center text-[14px] text-[#595C5B] max-w-[540px] mx-auto reveal">
-              This is what &ldquo;vetted&rdquo; actually means. Not a tick box — a
-              process.
+            {/* Supporting copy below grid */}
+            <p className="font-[family-name:var(--font-rubik)] text-[14px] text-[#595C5B] max-w-[600px] mx-auto text-center reveal">
+              We&apos;re not a directory. Anyone can pay to appear in a directory. We check every mechanic individually, and we take responsibility for who&apos;s on the platform.
             </p>
           </div>
         </section>

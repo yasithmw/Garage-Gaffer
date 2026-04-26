@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const WrenchIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -70,12 +71,12 @@ export default function Nav() {
     <header className="sticky top-0 z-50 bg-white/88 backdrop-saturate-180 backdrop-blur-[14px] border-b border-[#DADCDB]">
       <div className="max-w-[1200px] mx-auto px-6 flex items-center gap-6 h-[72px]">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 font-[family-name:var(--font-open-sans)] font-extrabold text-[17px] tracking-[-0.3px] text-[#1A1E1D]">
+        <Link href="/" className="flex items-center gap-2.5 font-[family-name:var(--font-open-sans)] font-extrabold text-[17px] tracking-[-0.3px] text-[#1A1E1D]">
           <span className="w-7 h-7 rounded-full bg-gradient-to-br from-[#0D7A5F] to-[#055240] flex items-center justify-center shadow-[0_4px_10px_rgba(13,122,95,0.3)] text-white">
             <WrenchIcon />
           </span>
           Garage Gaffer
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1 ml-7" aria-label="Primary">
@@ -95,7 +96,7 @@ export default function Nav() {
               <div className="absolute top-full left-0 pt-2 min-w-[240px]">
                 <div className="bg-white border border-[#DADCDB] rounded-xl shadow-[0_8px_24px_rgba(13,122,95,0.12),0_4px_8px_rgba(0,0,0,0.06)] p-2">
                   {services.map((s) => (
-                    <a key={s.title} href={"href" in s ? s.href : "#services"} className="flex gap-3 items-start p-2.5 rounded-lg hover:bg-[#ECF7EF] transition-colors">
+                    <Link key={s.title} href={s.href} className="flex gap-3 items-start p-2.5 rounded-lg hover:bg-[#ECF7EF] transition-colors">
                       <span className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${s.iconBg}`}>
                         {s.icon}
                       </span>
@@ -103,7 +104,7 @@ export default function Nav() {
                         <strong className="block text-[13.5px] font-semibold text-[#1A1E1D] font-[family-name:var(--font-rubik)]">{s.title}</strong>
                         <span className="block text-[12.5px] text-[#595C5B] mt-0.5">{s.desc}</span>
                       </span>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -114,13 +115,13 @@ export default function Nav() {
             const hrefs: Record<string, string> = {
               "How It Works": "/how-it-works",
               "About Us": "/about",
-              "Become a Mechanic": "#mechanics",
+              "Become a Mechanic": "/become-a-mechanic",
               "Support": "/support",
             };
             return (
-              <a key={label} href={hrefs[label]} className="px-3 py-2 rounded-lg font-[family-name:var(--font-rubik)] font-medium text-[13.5px] text-[#595C5B] hover:bg-[#F5F7F6] hover:text-[#1A1E1D] transition-colors">
+              <Link key={label} href={hrefs[label]} className="px-3 py-2 rounded-lg font-[family-name:var(--font-rubik)] font-medium text-[13.5px] text-[#595C5B] hover:bg-[#F5F7F6] hover:text-[#1A1E1D] transition-colors">
                 {label}
-              </a>
+              </Link>
             );
           })}
         </nav>
@@ -148,11 +149,11 @@ export default function Nav() {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-[#DADCDB] bg-white px-6 py-4 flex flex-col gap-2">
-          <a href="#services" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Our Services</a>
-          <a href="/how-it-works" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>How It Works</a>
-          <a href="/about" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>About Us</a>
-          <a href="#mechanics" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Become a Mechanic</a>
-          <a href="/support" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Support</a>
+          <Link href="#services" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Our Services</Link>
+          <Link href="/how-it-works" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>How It Works</Link>
+          <Link href="/about" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>About Us</Link>
+          <Link href="/become-a-mechanic" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Become a Mechanic</Link>
+          <Link href="/support" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Support</Link>
           <div className="flex gap-3 mt-2 pt-2 border-t border-[#DADCDB]">
             <button className="flex-1 py-2.5 rounded-lg text-[14px] font-semibold text-[#595C5B] border border-[#DADCDB]">Sign In</button>
             <a href="#quote" className="flex-1 py-2.5 rounded-lg text-[14px] font-semibold text-center bg-[#0D7A5F] text-white" onClick={() => setMobileOpen(false)}>Get Started</a>

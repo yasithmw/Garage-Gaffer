@@ -64,7 +64,7 @@ export default function SupportFAQ() {
           {driverFaqs.map((faq, i) => (
             <div
               key={i}
-              className={`bg-white border rounded-2xl px-6 overflow-hidden transition-all duration-200 reveal ${
+              className={`bg-white border rounded-2xl px-6 overflow-hidden transition-all duration-300 reveal ${
                 open === i 
                   ? "border-[#0D7A5F] shadow-[0_4px_12px_rgba(13,122,95,0.08)]" 
                   : "border-[#DADCDB] hover:border-[#b0bab5]"
@@ -76,7 +76,7 @@ export default function SupportFAQ() {
                 aria-expanded={open === i}
               >
                 {faq.q}
-                <span className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                <span className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                   open === i ? "bg-[#0D7A5F] text-white rotate-45" : "bg-[#ECF7EF] text-[#0D7A5F]"
                 }`}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="w-3.5 h-3.5">
@@ -85,14 +85,18 @@ export default function SupportFAQ() {
                 </span>
               </button>
               <div 
-                className={`grid transition-all duration-200 ${
-                  open === i ? "grid-rows-[1fr] pb-6" : "grid-rows-[0fr]"
-                }`}
+                className="grid transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                style={{ 
+                  gridTemplateRows: open === i ? "1fr" : "0fr",
+                  opacity: open === i ? 1 : 0
+                }}
               >
                 <div className="overflow-hidden">
-                  <p className="font-[family-name:var(--font-rubik)] text-[14.5px] leading-[1.7] text-[#595C5B]">
-                    {faq.a}
-                  </p>
+                  <div className="pb-6">
+                    <p className="font-[family-name:var(--font-rubik)] text-[14.5px] leading-[1.7] text-[#595C5B]">
+                      {faq.a}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

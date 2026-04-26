@@ -37,7 +37,7 @@ const ChevronIcon = ({ open }: { open: boolean }) => (
     strokeWidth="2.2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+    className={`w-4 h-4 flex-shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
     aria-hidden="true"
   >
     <polyline points="6 9 12 15 18 9" />
@@ -65,11 +65,15 @@ export default function HowItWorksFAQ() {
             return (
               <div
                 key={i}
-                className="bg-white border border-[#DADCDB] rounded-2xl overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
+                className={`bg-white border rounded-2xl px-6 overflow-hidden transition-all duration-300 reveal ${
+                  isOpen 
+                    ? "border-[#0D7A5F] shadow-[0_4px_12px_rgba(13,122,95,0.08)]" 
+                    : "border-[#DADCDB] hover:border-[#b0bab5]"
+                }`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-[#F5F7F6] transition-colors"
+                  className="w-full flex items-center justify-between gap-4 py-5 text-left transition-colors"
                   aria-expanded={isOpen}
                   id={`faq-btn-${i}`}
                   aria-controls={`faq-panel-${i}`}
@@ -82,19 +86,25 @@ export default function HowItWorksFAQ() {
                   </span>
                 </button>
 
-                {isOpen && (
-                  <div
-                    id={`faq-panel-${i}`}
-                    role="region"
-                    aria-labelledby={`faq-btn-${i}`}
-                    className="px-6 pb-5"
-                  >
-                    <div className="w-full h-px bg-[#DADCDB] mb-4" />
-                    <p className="text-[14.5px] leading-[1.7] text-[#595C5B]">
-                      {faq.a}
-                    </p>
+                <div 
+                  id={`faq-panel-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${i}`}
+                  className="grid transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                  style={{ 
+                    gridTemplateRows: isOpen ? "1fr" : "0fr",
+                    opacity: isOpen ? 1 : 0
+                  }}
+                >
+                  <div className="overflow-hidden">
+                    <div className="pb-5">
+                      <div className="w-full h-px bg-[#DADCDB] mb-4" />
+                      <p className="text-[14.5px] leading-[1.7] text-[#595C5B]">
+                        {faq.a}
+                      </p>
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}
