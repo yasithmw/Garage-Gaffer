@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import QuoteWidget from "@/components/QuoteWidget";
+import CompactQuoteWidget from "@/components/CompactQuoteWidget";
 
 /* ── Problem-area pill data (repair.md Section 5) ────────────── */
 const PROBLEM_PILLS = [
@@ -67,14 +67,12 @@ export default function RepairProblemFinder() {
           })}
         </div>
 
-        {/* QuoteWidget — separated by a top border on mobile */}
+        {/* Compact widget — same UI as the hero */}
         <div className="border-t border-[#DADCDB] pt-10 mt-4 reveal">
-          <div className="max-w-[480px] mx-auto">
-            <QuoteWidget
-              idSuffix="repair-finder"
-              defaultService="Repair a specific issue"
-            />
-          </div>
+          <CompactQuoteWidget
+            idSuffix="repair-finder"
+            defaultService="Repair a specific issue"
+          />
         </div>
       </div>
     </section>
