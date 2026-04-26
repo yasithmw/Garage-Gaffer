@@ -192,6 +192,7 @@ Tapping a card writes the service to session and immediately navigates to `/book
 
 **Diagnostics tab:**
 - "IN-PERSON DIAGNOSTIC" section label
+- Short description text below the label
 - Options list: Diagnostic Inspection | Car Won't Start Inspection | Plug-in Diagnostic Inspection — each shows name, price, star rating + review count, More info link, Add/Remove button
 - Banner: "Unsure what's wrong? Use our free diagnostics tool."
 
@@ -258,12 +259,12 @@ On Next Step: write `selectedWork` to session, add `2` to `completedSteps[]`, na
 - Phone Number
 
 **Section 3 — When Is the Vehicle Available?**
-- Info note about selecting multiple availability windows
+- Info note: "Please select ALL of the times when you are available across multiple days. Once a mechanic has been assigned you will receive a 2-hour arrival window."
+- Counter above the grid: "You have selected X dates"
 - Date navigation: < [date range] > arrows (week by week)
-- Availability grid: columns = dates, rows = All day | 8–10 AM | 10–12 AM | 12–2 PM | 2–4 PM | 4–6 PM | 6–8 PM
+- Availability grid: columns = dates (Mon, Tue, Wed, Thu, Fri…), rows = All day | 8–10 AM | 10–12 AM | 12–2 PM | 2–4 PM | 4–6 PM | 6–8 PM
 - Each cell: tappable, selected = filled blue, unselected = outlined
-- Some dates show "Priority slots +£25" note
-- Counter: "You have selected X dates"
+- Some dates show "Priority slots +£25" note below the date
 
 **Section 4 — Your Vehicle Details:**
 - Radio: "Is your vehicle drivable if collected?" — Yes | No
@@ -283,9 +284,9 @@ On Final Step: write all details to session, add `3` to `completedSteps[]`, navi
 - ✓ 1 year parts & repairs warranty
 
 **Why provide your card details now?** — three points with green checkmark icons:
-- We Won't Charge You
-- Extra Protection
-- Free Cancellation
+- **We Won't Charge You** — You won't pay a penny until the work is complete.
+- **Extra Protection** — If any issues arise after the booking it's easier to refund you.
+- **Free Cancellation** — Up to 24 hours before the booking.
 
 **Payment Form:**
 - Card type selector: Visa | Mastercard | American Express (clickable logo buttons)
@@ -323,7 +324,8 @@ Two integrations are deferred and handled as no-ops for now:
 
 ## 9. General Rules (from spec)
 
-- Progress bar advances forward only — does not update if user navigates back
+- Progress bar active indicator updates as the user moves forward and also when they navigate back — it always reflects the current URL/step
+- Completed steps remain green with tick even when the user navigates back; they do not revert to inactive
 - Users cannot skip steps forward (Next Step is the only way forward)
 - "More info" links open inline expanded text or a modal — no page navigation
 - All forms validate on submission, not on blur
