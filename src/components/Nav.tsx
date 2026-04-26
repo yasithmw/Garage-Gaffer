@@ -57,6 +57,7 @@ const services = [
     ),
     iconBg: "bg-[#E4F6F6] text-[#31A7A8]",
     title: "Servicing",
+    href: "/servicing",
     desc: "Keep your car happy with interim and full services.",
   },
 ];
@@ -91,18 +92,20 @@ export default function Nav() {
               </span>
             </button>
             {servicesOpen && (
-              <div className="absolute top-[calc(100%+8px)] left-0 bg-white border border-[#DADCDB] rounded-xl shadow-[0_8px_24px_rgba(13,122,95,0.12),0_4px_8px_rgba(0,0,0,0.06)] min-w-[240px] p-2">
-                {services.map((s) => (
-                  <a key={s.title} href={"href" in s ? s.href : "#services"} className="flex gap-3 items-start p-2.5 rounded-lg hover:bg-[#ECF7EF] transition-colors">
-                    <span className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${s.iconBg}`}>
-                      {s.icon}
-                    </span>
-                    <span>
-                      <strong className="block text-[13.5px] font-semibold text-[#1A1E1D] font-[family-name:var(--font-rubik)]">{s.title}</strong>
-                      <span className="block text-[12.5px] text-[#595C5B] mt-0.5">{s.desc}</span>
-                    </span>
-                  </a>
-                ))}
+              <div className="absolute top-full left-0 pt-2 min-w-[240px]">
+                <div className="bg-white border border-[#DADCDB] rounded-xl shadow-[0_8px_24px_rgba(13,122,95,0.12),0_4px_8px_rgba(0,0,0,0.06)] p-2">
+                  {services.map((s) => (
+                    <a key={s.title} href={"href" in s ? s.href : "#services"} className="flex gap-3 items-start p-2.5 rounded-lg hover:bg-[#ECF7EF] transition-colors">
+                      <span className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${s.iconBg}`}>
+                        {s.icon}
+                      </span>
+                      <span>
+                        <strong className="block text-[13.5px] font-semibold text-[#1A1E1D] font-[family-name:var(--font-rubik)]">{s.title}</strong>
+                        <span className="block text-[12.5px] text-[#595C5B] mt-0.5">{s.desc}</span>
+                      </span>
+                    </a>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -110,9 +113,9 @@ export default function Nav() {
           {["How It Works", "About Us", "Become a Mechanic", "Support"].map((label) => {
             const hrefs: Record<string, string> = {
               "How It Works": "/how-it-works",
-              "About Us": "#about",
+              "About Us": "/about",
               "Become a Mechanic": "#mechanics",
-              "Support": "#support",
+              "Support": "/support",
             };
             return (
               <a key={label} href={hrefs[label]} className="px-3 py-2 rounded-lg font-[family-name:var(--font-rubik)] font-medium text-[13.5px] text-[#595C5B] hover:bg-[#F5F7F6] hover:text-[#1A1E1D] transition-colors">
@@ -147,9 +150,9 @@ export default function Nav() {
         <div className="md:hidden border-t border-[#DADCDB] bg-white px-6 py-4 flex flex-col gap-2">
           <a href="#services" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Our Services</a>
           <a href="/how-it-works" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>How It Works</a>
-          <a href="#about" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>About Us</a>
+          <a href="/about" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>About Us</a>
           <a href="#mechanics" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Become a Mechanic</a>
-          <a href="#support" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Support</a>
+          <a href="/support" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Support</a>
           <div className="flex gap-3 mt-2 pt-2 border-t border-[#DADCDB]">
             <button className="flex-1 py-2.5 rounded-lg text-[14px] font-semibold text-[#595C5B] border border-[#DADCDB]">Sign In</button>
             <a href="#quote" className="flex-1 py-2.5 rounded-lg text-[14px] font-semibold text-center bg-[#0D7A5F] text-white" onClick={() => setMobileOpen(false)}>Get Started</a>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans, Rubik } from "next/font/google";
 import "./globals.css";
+import StyledJsxRegistry from "./registry";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -27,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${rubik.variable} ${openSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <StyledJsxRegistry>{children}</StyledJsxRegistry>
+      </body>
     </html>
   );
 }
