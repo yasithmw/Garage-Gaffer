@@ -1,0 +1,160 @@
+"use client";
+
+import { useState } from "react";
+import type { SelectedItem, BookingSession } from "../useBookingSession";
+
+interface PriceSummaryStickyBarProps {
+  selectedWork: SelectedItem[];
+  session: BookingSession;
+  onRemove: (id: string) => void;
+  onNextStep: () => void;
+  dealerTotal: number;
+}
+
+function calcTotal(items: SelectedItem[]) {
+  return items.reduce((acc, i) => acc + i.price, 0);
+}
+
+export default function PriceSummaryStickyBar({
+  selectedWork,
+  onRemove,
+  onNextStep,
+  dealerTotal,
+}: PriceSummaryStickyBarProps) {
+  const [expanded, setExpanded] = useState(false);
+  const total = calcTotal(selectedWork);
+  const savePercent = dealerTotal > 0 ? Math.round((1 - total / dealerTotal) * 100) : 0;
+
+  return (
+    <div className="pssb-outer">
+      {/* Expanded panel */}
+      {expanded && (
+        <div className="pssb-expanded">
+          <div className="pssb-expanded-header">
+            <span className="pssb-expanded-title">Your Quote</span>
+            <button className="pssb-close" onClick={() => setExpanded(false)} type="button" aria-label="Close summary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <div className="pssb-items">
+            {selectedWork.length === 0 ? (
+              <p className="pssb-empty">No items added yet.</p>
+            ) : (
+              selectedWork.map((item) => (
+                <div key={item.id} className="pssb-item">
+                  <button
+                    className="pssb-remove"
+                    onClick={() => onRemove(item.id)}
+                    aria-label={`Remove ${item.name}`}
+                    type="button"
+                  >
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  </button>
+                  <span className="pssb-item-name">{item.name}</span>
+                  <span className="pssb-item-price">£{item.price}</span>
+                </div>
+              ))
+            )}
+          </div>
+
+          <div className="pssb-divider" />
+
+          <div className="pssb-extras">
+            <div className="pssb-extra"><span>Booking fee</span><span className="pssb-free">FREE</span></div>
+            <div className="pssb-extra"><span>Collection &amp; Delivery</span><span className="pssb-free">FREE</span></div>
+            <div className="pssb-extra"><span>12-Month Warranty</span><span className="pssb-free">FREE</span></div>
+          </div>
+        </div>
+      )}
+
+      {/* Sticky bar */}
+      <div className="pssb-bar">
+        <button
+          className="pssb-summary-btn"
+          onClick={() => setExpanded(!expanded)}
+          aria-expanded={expanded}
+          aria-label={expanded ? "Collapse price summary" : "Expand price summary"}
+          type="button"
+        >
+          <div className="pssb-bar-left">
+            <span className="pssb-bar-total">£{total.toFixed(2)}</span>
+            {savePercent > 0 && <span className="pssb-bar-save">Save {savePercent}%</span>}
+            <svg
+              className={`pssb-chevron${expanded ? " pssb-chevron--up" : ""}`}
+              width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+        </button>
+        <button
+          className="pssb-next-btn btn btn-primary"
+          onClick={onNextStep}
+          disabled={selectedWork.length === 0}
+          type="button"
+        >
+          Next Step
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
+      </div>
+
+      <style jsx>{`
+        .pssb-outer {
+          position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+          display: none; /* shown only on mobile via responsive control in parent */
+        }
+        .pssb-expanded {
+          background: #fff; border-top: 1px solid var(--color-divider);
+          padding: 20px 20px 0; max-height: 50vh; overflow-y: auto;
+          display: flex; flex-direction: column; gap: 12px;
+          box-shadow: var(--shadow-xl);
+        }
+        .pssb-expanded-header { display: flex; justify-content: space-between; align-items: center; }
+        .pssb-expanded-title { font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
+        .pssb-close {
+          background: var(--color-bg); border: none; border-radius: var(--radius-sm);
+          width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+          cursor: pointer; color: var(--color-text-secondary);
+        }
+        .pssb-items { display: flex; flex-direction: column; gap: 6px; }
+        .pssb-empty { font-size: 13px; color: var(--color-text-disabled); margin: 0; }
+        .pssb-item { display: flex; align-items: center; gap: 8px; }
+        .pssb-remove {
+          width: 18px; height: 18px; border-radius: 3px; background: #FFF0F0;
+          color: var(--color-error); border: none; cursor: pointer;
+          display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .pssb-item-name { flex: 1; font-size: 13px; color: var(--color-text-primary); }
+        .pssb-item-price { font-size: 13px; font-weight: 700; }
+        .pssb-divider { height: 1px; background: var(--color-divider); }
+        .pssb-extras { display: flex; flex-direction: column; gap: 6px; padding-bottom: 4px; }
+        .pssb-extra { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--color-text-secondary); }
+        .pssb-free { font-weight: 700; color: var(--color-success); }
+        .pssb-bar {
+          background: #fff; border-top: 1px solid var(--color-divider);
+          padding: 12px 16px; display: flex; align-items: center; gap: 12px;
+          box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+        }
+        .pssb-summary-btn { background: none; border: none; cursor: pointer; flex: 1; text-align: left; padding: 0; }
+        .pssb-bar-left { display: flex; align-items: center; gap: 8px; }
+        .pssb-bar-total { font-size: 20px; font-weight: 900; font-family: var(--font-open-sans), sans-serif; }
+        .pssb-bar-save { background: var(--color-success); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: var(--radius-full); }
+        .pssb-chevron { color: var(--color-text-secondary); transition: transform var(--t-base); }
+        .pssb-chevron--up { transform: rotate(180deg); }
+        .pssb-next-btn { padding: 12px 20px; font-size: 14px; flex-shrink: 0; }
+        .pssb-next-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .pssb-chevron { transition: none; }
+        }
+      `}</style>
+    </div>
+  );
+}

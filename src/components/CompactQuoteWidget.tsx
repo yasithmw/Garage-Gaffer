@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
 
 interface CompactQuoteWidgetProps {
   defaultService?: string;
@@ -10,12 +11,28 @@ interface CompactQuoteWidgetProps {
 export default function CompactQuoteWidget({
   defaultService,
 }: CompactQuoteWidgetProps) {
+  const router = useRouter();
+  const postcodeRef = useRef<HTMLInputElement>(null);
+  const regRef = useRef<HTMLInputElement>(null);
+  const serviceRef = useRef<HTMLSelectElement>(null);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const reg = regRef.current?.value?.trim() ?? "";
+    const postcode = postcodeRef.current?.value?.trim() ?? "";
+    const service = serviceRef.current?.value?.trim() ?? "repairs";
+    if (reg && postcode) {
+      router.push(`/booking?reg=${encodeURIComponent(reg)}&postcode=${encodeURIComponent(postcode)}&service=${encodeURIComponent(service || "repairs")}`);
+    }
+  }
+
   return (
     <>
-      <form className="cqw-widget" onSubmit={(e) => e.preventDefault()}>
+      <form className="cqw-widget" onSubmit={handleSubmit}>
         <label className="cqw-field">
           <span className="cqw-field-label">Postcode</span>
           <input
+            ref={postcodeRef}
             type="text"
             placeholder="BS8 1TH"
             autoComplete="postal-code"
@@ -28,6 +45,7 @@ export default function CompactQuoteWidget({
           <span className="cqw-plate">
             <span className="cqw-plate-gb">GB</span>
             <input
+              ref={regRef}
               className="cqw-plate-input"
               type="text"
               placeholder="AB12 CDE"
@@ -37,12 +55,12 @@ export default function CompactQuoteWidget({
 
         <label className="cqw-field cqw-field-select">
           <span className="cqw-field-label">What do you need?</span>
-          <select className="cqw-field-input cqw-select" defaultValue={defaultService}>
-            <option>Repair a specific issue</option>
-            <option>Full service</option>
-            <option>MOT + repair</option>
-            <option>Diagnostic check</option>
-            <option>Brakes / tyres</option>
+          <select ref={serviceRef} className="cqw-field-input cqw-select" defaultValue={defaultService}>
+            <option value="repairs">Repair a specific issue</option>
+            <option value="servicing">Full service</option>
+            <option value="servicing">MOT + repair</option>
+            <option value="diagnostics">Diagnostic check</option>
+            <option value="repairs">Brakes / tyres</option>
           </select>
         </label>
 
