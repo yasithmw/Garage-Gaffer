@@ -1,16 +1,34 @@
 "use client";
 
+import { useRef } from "react";
+import { useRouter } from "next/navigation";
+
 interface QuoteWidgetProps {
   idSuffix?: string;
   defaultService?: string;
 }
 
 export default function QuoteWidget({ idSuffix = "", defaultService }: QuoteWidgetProps) {
+  const router = useRouter();
+  const postcodeRef = useRef<HTMLInputElement>(null);
+  const regRef = useRef<HTMLInputElement>(null);
+  const serviceRef = useRef<HTMLSelectElement>(null);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const reg = regRef.current?.value?.trim() ?? "";
+    const postcode = postcodeRef.current?.value?.trim() ?? "";
+    const service = serviceRef.current?.value?.trim() ?? "repairs";
+    if (reg && postcode) {
+      router.push(`/booking?reg=${encodeURIComponent(reg)}&postcode=${encodeURIComponent(postcode)}&service=${encodeURIComponent(service || "repairs")}`);
+    }
+  }
+
   return (
     <form
       id={idSuffix ? undefined : "quote"}
       className="relative bg-white rounded-3xl p-7 shadow-[0_16px_48px_rgba(13,122,95,0.15),0_8px_16px_rgba(0,0,0,0.08)] border border-[rgba(13,122,95,0.1)]"
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={handleSubmit}
     >
       {/* green tint border overlay */}
       <div className="absolute inset-[-1px] rounded-3xl bg-gradient-to-br from-[rgba(13,122,95,0.15)] to-transparent -z-10 pointer-events-none" />
@@ -36,6 +54,7 @@ export default function QuoteWidget({ idSuffix = "", defaultService }: QuoteWidg
           </svg>
           <input
             id={`postcode${idSuffix}`}
+            ref={postcodeRef}
             type="text"
             placeholder={idSuffix ? "e.g. BS8 1TH" : "e.g. BS1 4DJ"}
             autoComplete="postal-code"
@@ -56,6 +75,7 @@ export default function QuoteWidget({ idSuffix = "", defaultService }: QuoteWidg
           </span>
           <input
             id={`reg${idSuffix}`}
+            ref={regRef}
             type="text"
             placeholder="AB12 CDE"
             maxLength={8}
@@ -76,16 +96,17 @@ export default function QuoteWidget({ idSuffix = "", defaultService }: QuoteWidg
           </svg>
           <select
             id={`service${idSuffix}`}
+            ref={serviceRef}
             defaultValue={defaultService ?? ""}
             className="w-full bg-white border-[1.5px] border-[#DADCDB] rounded-lg pl-10 pr-9 py-3 text-[14px] text-[#1A1E1D] appearance-none hover:border-[#b0bab5] focus:outline-none focus:border-[#0D7A5F] focus:shadow-[0_0_0_3px_rgba(13,122,95,0.12)] transition-all"
             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23595C5B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 14px center" }}
           >
             <option value="">Choose a service</option>
-            <option>Repair a specific issue</option>
-            <option>Run full diagnostics</option>
-            <option>Interim service</option>
-            <option>Full service</option>
-            <option>I&apos;m not sure yet</option>
+            <option value="repairs">Repair a specific issue</option>
+            <option value="diagnostics">Run full diagnostics</option>
+            <option value="servicing">Interim service</option>
+            <option value="servicing">Full service</option>
+            <option value="repairs">I&apos;m not sure yet</option>
           </select>
         </div>
       </div>
