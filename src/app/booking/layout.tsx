@@ -1,4 +1,4 @@
-import Nav from "@/components/Nav";
+import BookingTopBar from "@/components/booking/BookingTopBar";
 import Footer from "@/components/Footer";
 import BookingProgressBar from "@/components/booking/BookingProgressBar";
 import { Suspense } from "react";
@@ -11,7 +11,7 @@ export const metadata = {
 export default function BookingLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Nav />
+      <BookingTopBar />
       <Suspense fallback={
         <div style={{ background: "#fff", borderBottom: "1px solid #DADCDB", height: 72 }} />
       }>

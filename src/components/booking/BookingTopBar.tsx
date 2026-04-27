@@ -1,0 +1,427 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+
+const WrenchIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+  </svg>
+);
+
+const FAQ_SECTIONS = [
+  {
+    section: "How it works",
+    items: [
+      {
+        q: "How does Garage Gaffer work?",
+        a: "You enter your car details and postcode, select the work you need, and we match you with a vetted local mechanic who comes to you. You pay only after the job is done.",
+      },
+      {
+        q: "Who are the mechanics?",
+        a: "All Garage Gaffer mechanics are fully qualified, DBS-checked, and reviewed by real customers. Many are ex-main dealer technicians with years of experience.",
+      },
+      {
+        q: "Is there a warranty for your services?",
+        a: "Yes — all labour and parts are covered by a 12-month warranty. If anything goes wrong after the job, we'll sort it at no extra cost.",
+      },
+      {
+        q: "Do I pay more for the mechanic to come to me?",
+        a: "No. Our prices are all-in. Collection & delivery is included free, and there are no call-out fees or hidden extras.",
+      },
+      {
+        q: "Is there a cancellation fee?",
+        a: "You can cancel for free up to 24 hours before your booking. After that, a small fee may apply to cover the mechanic's travel.",
+      },
+      {
+        q: "Can I supply my own parts?",
+        a: "We recommend using our vetted parts suppliers as they're covered by the warranty. If you'd like to supply your own parts, please let us know in the booking notes and a mechanic will advise.",
+      },
+    ],
+  },
+  {
+    section: "Booking",
+    items: [
+      {
+        q: "I'm not sure what's wrong, what should I do?",
+        a: "Add a Diagnostic Inspection to your booking. Our mechanic will identify the fault and give you a full report before any further work is carried out.",
+      },
+      {
+        q: "When can I book in for?",
+        a: "You choose your own availability windows across multiple days. Once a mechanic is confirmed, you'll receive a 2-hour arrival window by text and email.",
+      },
+      {
+        q: "I can't find my repair, help!",
+        a: "Use the search bar on the Select Work screen, or browse by category. If you still can't find it, add a Diagnostic and our mechanic will assess and quote on the day.",
+      },
+      {
+        q: "Can I add more work after I've booked?",
+        a: "Yes — message your mechanic directly once assigned, or contact our support team and we'll update the booking for you.",
+      },
+    ],
+  },
+];
+
+export default function BookingTopBar() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [openItem, setOpenItem] = useState<string | null>(null);
+
+  function toggleItem(key: string) {
+    setOpenItem((prev) => (prev === key ? null : key));
+  }
+
+  return (
+    <>
+      <header className="btb-header">
+        {/* Logo */}
+        <Link href="/" className="btb-logo">
+          <span className="btb-logo-icon">
+            <WrenchIcon />
+          </span>
+          <span className="btb-logo-text">Garage Gaffer</span>
+        </Link>
+
+        {/* Help button */}
+        <button
+          className="btb-help-btn"
+          onClick={() => setModalOpen(true)}
+          type="button"
+          aria-label="Open help and FAQ"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          I need help
+        </button>
+      </header>
+
+      {/* Modal overlay */}
+      {modalOpen && (
+        <div className="btb-overlay" onClick={() => setModalOpen(false)} role="dialog" aria-modal="true" aria-label="Frequently asked questions">
+          <div className="btb-modal" onClick={(e) => e.stopPropagation()}>
+            {/* Modal header */}
+            <div className="btb-modal-header">
+              <h2 className="btb-modal-title">Frequently asked questions</h2>
+              <button
+                className="btb-modal-close"
+                onClick={() => setModalOpen(false)}
+                type="button"
+                aria-label="Close"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Scrollable content */}
+            <div className="btb-modal-body">
+              {FAQ_SECTIONS.map((sec) => (
+                <div key={sec.section} className="btb-faq-section">
+                  <h3 className="btb-faq-section-title">{sec.section}</h3>
+                  <div className="btb-faq-list">
+                    {sec.items.map((item, i) => {
+                      const key = `${sec.section}-${i}`;
+                      const isOpen = openItem === key;
+                      return (
+                        <div key={key} className={`btb-faq-item${isOpen ? " btb-faq-item--open" : ""}`}>
+                          <button
+                            className="btb-faq-trigger"
+                            onClick={() => toggleItem(key)}
+                            type="button"
+                            aria-expanded={isOpen}
+                          >
+                            <span>{item.q}</span>
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="btb-faq-chevron"
+                              aria-hidden="true"
+                            >
+                              <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                          </button>
+                          {isOpen && (
+                            <p className="btb-faq-answer">{item.a}</p>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Modal footer */}
+            <div className="btb-modal-footer">
+              Didn&apos;t find what you need? Email us at{" "}
+              <a href="mailto:support@garagegaffer.co.uk" className="btb-modal-email">
+                support@garagegaffer.co.uk
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        /* ── Top bar ── */
+        .btb-header {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          height: 72px;
+          background: rgba(255, 255, 255, 0.88);
+          backdrop-filter: saturate(180%) blur(14px);
+          -webkit-backdrop-filter: saturate(180%) blur(14px);
+          border-bottom: 1px solid var(--color-divider);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 24px;
+          max-width: 100%;
+        }
+
+        .btb-logo {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+        }
+        .btb-logo-icon {
+          width: 28px;
+          height: 28px;
+          border-radius: 9999px;
+          background: linear-gradient(135deg, #0D7A5F, #055240);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          box-shadow: 0 4px 10px rgba(13, 122, 95, 0.3);
+          flex-shrink: 0;
+        }
+        .btb-logo-text {
+          font-family: var(--font-open-sans), sans-serif;
+          font-weight: 800;
+          font-size: 17px;
+          letter-spacing: -0.3px;
+          color: var(--color-text-primary);
+        }
+
+        .btb-help-btn {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          padding: 8px 16px;
+          border-radius: var(--radius-lg);
+          border: 1.5px solid var(--color-divider);
+          background: #fff;
+          font-family: var(--font-rubik), sans-serif;
+          font-size: 13px;
+          font-weight: 600;
+          color: var(--color-text-primary);
+          cursor: pointer;
+          transition: border-color var(--t-fast), background var(--t-fast), color var(--t-fast);
+        }
+        .btb-help-btn:hover {
+          border-color: var(--color-brand-primary);
+          color: var(--color-brand-primary);
+          background: var(--color-brand-mint);
+        }
+
+        /* ── Overlay ── */
+        .btb-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 200;
+          background: rgba(0, 0, 0, 0.45);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 16px;
+          animation: btb-fade-in 150ms ease;
+        }
+
+        /* ── Modal ── */
+        .btb-modal {
+          background: #fff;
+          border-radius: var(--radius-xl);
+          width: 100%;
+          max-width: 560px;
+          max-height: 85vh;
+          display: flex;
+          flex-direction: column;
+          box-shadow: var(--shadow-xl);
+          animation: btb-slide-up 200ms ease;
+          overflow: hidden;
+        }
+
+        .btb-modal-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 22px 24px 18px;
+          border-bottom: 1px solid var(--color-divider);
+          flex-shrink: 0;
+        }
+        .btb-modal-title {
+          font-family: var(--font-open-sans), sans-serif;
+          font-size: 18px;
+          font-weight: 800;
+          color: var(--color-text-primary);
+          letter-spacing: -0.3px;
+          margin: 0;
+        }
+        .btb-modal-close {
+          width: 32px;
+          height: 32px;
+          border-radius: var(--radius-md);
+          border: none;
+          background: transparent;
+          color: var(--color-text-secondary);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background var(--t-fast), color var(--t-fast);
+          flex-shrink: 0;
+        }
+        .btb-modal-close:hover {
+          background: #f0f0f0;
+          color: var(--color-text-primary);
+        }
+
+        /* ── Body ── */
+        .btb-modal-body {
+          overflow-y: auto;
+          flex: 1;
+          padding: 20px 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .btb-faq-section-title {
+          font-family: var(--font-open-sans), sans-serif;
+          font-size: 16px;
+          font-weight: 800;
+          color: var(--color-text-primary);
+          margin: 0 0 12px;
+          letter-spacing: -0.2px;
+        }
+
+        .btb-faq-list {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .btb-faq-item {
+          border: 1px solid var(--color-divider);
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          transition: border-color var(--t-fast);
+        }
+        .btb-faq-item--open {
+          border-color: var(--color-brand-primary);
+        }
+
+        .btb-faq-trigger {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          padding: 14px 16px;
+          background: #fff;
+          border: none;
+          cursor: pointer;
+          text-align: left;
+          font-family: var(--font-rubik), sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--color-text-secondary);
+          transition: color var(--t-fast), background var(--t-fast);
+        }
+        .btb-faq-item--open .btb-faq-trigger {
+          color: var(--color-text-primary);
+          font-weight: 600;
+        }
+        .btb-faq-trigger:hover {
+          background: var(--color-brand-mint);
+          color: var(--color-text-primary);
+        }
+
+        .btb-faq-chevron {
+          flex-shrink: 0;
+          color: var(--color-text-secondary);
+          transition: transform var(--t-base);
+        }
+        .btb-faq-item--open .btb-faq-chevron {
+          transform: rotate(180deg);
+          color: var(--color-brand-primary);
+        }
+
+        .btb-faq-answer {
+          padding: 0 16px 14px;
+          margin: 0;
+          font-family: var(--font-rubik), sans-serif;
+          font-size: 13.5px;
+          color: var(--color-text-secondary);
+          line-height: 1.65;
+          border-top: 1px solid var(--color-divider);
+          padding-top: 12px;
+        }
+
+        /* ── Footer ── */
+        .btb-modal-footer {
+          border-top: 1px solid var(--color-divider);
+          padding: 16px 24px;
+          font-family: var(--font-rubik), sans-serif;
+          font-size: 13px;
+          color: var(--color-text-secondary);
+          text-align: center;
+          flex-shrink: 0;
+        }
+        .btb-modal-email {
+          color: var(--color-brand-primary);
+          font-weight: 600;
+          text-decoration: none;
+        }
+        .btb-modal-email:hover {
+          text-decoration: underline;
+        }
+
+        /* ── Animations ── */
+        @keyframes btb-fade-in {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        @keyframes btb-slide-up {
+          from { opacity: 0; transform: translateY(12px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .btb-overlay, .btb-modal { animation: none; }
+          .btb-faq-chevron { transition: none; }
+          .btb-help-btn, .btb-modal-close, .btb-faq-trigger, .btb-faq-item { transition: none; }
+        }
+
+        @media (max-width: 560px) {
+          .btb-header { padding: 0 16px; }
+          .btb-logo-text { font-size: 15px; }
+          .btb-help-btn { padding: 7px 12px; font-size: 12.5px; }
+          .btb-modal { max-height: 92vh; border-radius: var(--radius-lg); }
+        }
+      `}</style>
+    </>
+  );
+}
