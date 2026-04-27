@@ -75,7 +75,6 @@ function CustomSelect({ id, label, value, onChange, options, placeholder, disabl
 
   return (
     <div className="cs-wrap" ref={wrapRef} onKeyDown={handleKey}>
-      <label htmlFor={id} className="cs-label">{label}</label>
       <button
         id={id}
         type="button"
@@ -128,16 +127,7 @@ function CustomSelect({ id, label, value, onChange, options, placeholder, disabl
       )}
 
       <style jsx>{`
-        .cs-wrap { position: relative; display: flex; flex-direction: column; gap: 3px; }
-
-        .cs-label {
-          font-size: 11px;
-          font-weight: 700;
-          color: var(--color-text-primary);
-          letter-spacing: 0.03em;
-          font-family: var(--font-rubik), sans-serif;
-          text-transform: uppercase;
-        }
+        .cs-wrap { position: relative; }
 
         .cs-trigger {
           width: 100%;
@@ -146,7 +136,8 @@ function CustomSelect({ id, label, value, onChange, options, placeholder, disabl
           justify-content: space-between;
           gap: 8px;
           padding: 0 10px;
-          height: 34px;
+          height: 36px;
+          line-height: 36px;
           border-radius: var(--radius-md);
           border: 1.5px solid var(--color-divider);
           background: #fff;
@@ -154,6 +145,7 @@ function CustomSelect({ id, label, value, onChange, options, placeholder, disabl
           text-align: left;
           transition: border-color var(--t-fast), box-shadow var(--t-fast);
           font-family: var(--font-rubik), sans-serif;
+          box-sizing: border-box;
         }
         .cs-trigger:hover:not(:disabled) { border-color: #b0bab5; }
         .cs-trigger--open {
@@ -296,11 +288,10 @@ export default function CarDetailsTab({ values, onChange }: CarDetailsTabProps) 
       />
 
       <div className="cdt-field">
-        <label htmlFor="cdt-postcode" className="cdt-label">Postcode</label>
         <input
           id="cdt-postcode"
           type="text"
-          placeholder="e.g. BS1 4DJ"
+          placeholder="Postcode — e.g. BS1 4DJ"
           autoComplete="postal-code"
           className="cdt-input"
           value={values.postcode}
@@ -312,25 +303,18 @@ export default function CarDetailsTab({ values, onChange }: CarDetailsTabProps) 
         .cdt-stack {
           display: flex;
           flex-direction: column;
-          gap: 7px;
+          gap: 6px;
         }
 
         .cdt-field {
           display: flex;
           flex-direction: column;
-          gap: 3px;
-        }
-        .cdt-label {
-          font-size: 11px;
-          font-weight: 700;
-          color: var(--color-text-primary);
-          letter-spacing: 0.03em;
-          text-transform: uppercase;
-          font-family: var(--font-rubik), sans-serif;
         }
         .cdt-input {
-          height: 34px;
+          height: 36px;
+          line-height: 36px;
           padding: 0 10px;
+          box-sizing: border-box;
           border-radius: var(--radius-md);
           border: 1.5px solid var(--color-divider);
           background: #fff;
