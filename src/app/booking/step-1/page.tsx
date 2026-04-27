@@ -158,7 +158,7 @@ function Step1Content() {
         .s1-card {
           background: #fff;
           border-radius: var(--radius-xl);
-          padding: 40px;
+          padding: 24px 40px 40px;
           box-shadow: var(--shadow-lg);
         }
         .s1-header {
@@ -202,12 +202,15 @@ function Step1Content() {
           box-shadow: var(--shadow-sm);
         }
         .s1-panel {
-          height: 200px;
+          height: 230px;
           overflow-y: auto;
           overflow-x: hidden;
           margin-bottom: 16px;
-          scrollbar-width: thin;
-          scrollbar-color: var(--color-divider) transparent;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .s1-panel::-webkit-scrollbar {
+          display: none;
         }
         .s1-error {
           display: flex;
@@ -240,7 +243,7 @@ function Step1Content() {
 
         @media (max-width: 560px) {
           .s1-card {
-            padding: 24px 20px;
+            padding: 16px 20px 32px;
           }
           .s1-title {
             font-size: 22px;
