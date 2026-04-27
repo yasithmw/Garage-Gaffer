@@ -162,13 +162,13 @@ function Step1Content() {
           box-shadow: var(--shadow-lg);
         }
         .s1-header {
-          margin-bottom: 28px;
+          margin-bottom: 14px;
         }
         .s1-title {
           font-size: 26px;
           font-weight: 800;
           letter-spacing: -0.4px;
-          margin-bottom: 6px;
+          margin-bottom: 4px;
         }
         .s1-subtitle {
           color: var(--color-text-secondary);
@@ -180,7 +180,7 @@ function Step1Content() {
           background: var(--color-bg);
           border-radius: var(--radius-md);
           padding: 4px;
-          margin-bottom: 28px;
+          margin-bottom: 14px;
           gap: 4px;
         }
         .s1-tab {
@@ -202,7 +202,12 @@ function Step1Content() {
           box-shadow: var(--shadow-sm);
         }
         .s1-panel {
-          margin-bottom: 20px;
+          height: 200px;
+          overflow-y: auto;
+          overflow-x: hidden;
+          margin-bottom: 16px;
+          scrollbar-width: thin;
+          scrollbar-color: var(--color-divider) transparent;
         }
         .s1-error {
           display: flex;
