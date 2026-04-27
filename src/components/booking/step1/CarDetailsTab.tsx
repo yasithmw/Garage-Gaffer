@@ -128,14 +128,15 @@ function CustomSelect({ id, label, value, onChange, options, placeholder, disabl
       )}
 
       <style jsx>{`
-        .cs-wrap { position: relative; display: flex; flex-direction: column; gap: 5px; }
+        .cs-wrap { position: relative; display: flex; flex-direction: column; gap: 3px; }
 
         .cs-label {
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 700;
           color: var(--color-text-primary);
-          letter-spacing: 0.02em;
+          letter-spacing: 0.03em;
           font-family: var(--font-rubik), sans-serif;
+          text-transform: uppercase;
         }
 
         .cs-trigger {
@@ -144,8 +145,8 @@ function CustomSelect({ id, label, value, onChange, options, placeholder, disabl
           align-items: center;
           justify-content: space-between;
           gap: 8px;
-          padding: 0 12px;
-          height: 40px;
+          padding: 0 10px;
+          height: 34px;
           border-radius: var(--radius-md);
           border: 1.5px solid var(--color-divider);
           background: #fff;
@@ -166,7 +167,7 @@ function CustomSelect({ id, label, value, onChange, options, placeholder, disabl
         }
 
         .cs-trigger-text {
-          font-size: 13.5px;
+          font-size: 13px;
           color: var(--color-text-primary);
           white-space: nowrap;
           overflow: hidden;
@@ -311,29 +312,30 @@ export default function CarDetailsTab({ values, onChange }: CarDetailsTabProps) 
         .cdt-stack {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 7px;
         }
 
         .cdt-field {
           display: flex;
           flex-direction: column;
-          gap: 5px;
+          gap: 3px;
         }
         .cdt-label {
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 700;
           color: var(--color-text-primary);
-          letter-spacing: 0.02em;
+          letter-spacing: 0.03em;
+          text-transform: uppercase;
           font-family: var(--font-rubik), sans-serif;
         }
         .cdt-input {
-          height: 40px;
-          padding: 0 12px;
+          height: 34px;
+          padding: 0 10px;
           border-radius: var(--radius-md);
           border: 1.5px solid var(--color-divider);
           background: #fff;
           font-family: var(--font-rubik), sans-serif;
-          font-size: 13.5px;
+          font-size: 13px;
           color: var(--color-text-primary);
           outline: none;
           transition: border-color var(--t-fast), box-shadow var(--t-fast);
