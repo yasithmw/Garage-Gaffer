@@ -73,6 +73,7 @@ export default function BookingTopBar() {
   return (
     <>
       <header className="btb-header">
+        <div className="btb-inner">
         {/* Logo */}
         <Link href="/" className="btb-logo">
           <span className="btb-logo-icon">
@@ -95,6 +96,7 @@ export default function BookingTopBar() {
           </svg>
           I need help
         </button>
+        </div>
       </header>
 
       {/* Modal overlay */}
@@ -177,16 +179,20 @@ export default function BookingTopBar() {
           position: sticky;
           top: 0;
           z-index: 50;
-          height: 72px;
           background: rgba(255, 255, 255, 0.88);
           backdrop-filter: saturate(180%) blur(14px);
           -webkit-backdrop-filter: saturate(180%) blur(14px);
           border-bottom: 1px solid var(--color-divider);
+        }
+        .btb-inner {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 24px;
+          height: 72px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0 24px;
-          max-width: 100%;
+          gap: 24px;
         }
 
         .btb-logo {
@@ -416,7 +422,7 @@ export default function BookingTopBar() {
         }
 
         @media (max-width: 560px) {
-          .btb-header { padding: 0 16px; }
+          .btb-inner { padding: 0 16px; }
           .btb-logo-text { font-size: 15px; }
           .btb-help-btn { padding: 7px 12px; font-size: 12.5px; }
           .btb-modal { max-height: 92vh; border-radius: var(--radius-lg); }
