@@ -74,12 +74,12 @@ export default function BookingTopBar() {
     <>
       <header className="btb-header">
         <div className="btb-inner">
-        {/* Logo */}
-        <Link href="/" className="btb-logo">
-          <span className="btb-logo-icon">
+        {/* Logo — identical markup to Nav */}
+        <Link href="/" className="flex items-center gap-2.5 font-[family-name:var(--font-open-sans)] font-extrabold text-[17px] tracking-[-0.3px] text-[#1A1E1D]">
+          <span className="w-7 h-7 rounded-full bg-gradient-to-br from-[#0D7A5F] to-[#055240] flex items-center justify-center shadow-[0_4px_10px_rgba(13,122,95,0.3)] text-white">
             <WrenchIcon />
           </span>
-          <span className="btb-logo-text">Garage Gaffer</span>
+          Garage Gaffer
         </Link>
 
         {/* Help button */}
@@ -193,32 +193,6 @@ export default function BookingTopBar() {
           align-items: center;
           justify-content: space-between;
           gap: 24px;
-        }
-
-        .btb-logo {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          text-decoration: none;
-        }
-        .btb-logo-icon {
-          width: 28px;
-          height: 28px;
-          border-radius: 9999px;
-          background: linear-gradient(135deg, #0D7A5F, #055240);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          box-shadow: 0 4px 10px rgba(13, 122, 95, 0.3);
-          flex-shrink: 0;
-        }
-        .btb-logo-text {
-          font-family: var(--font-open-sans), sans-serif;
-          font-weight: 800;
-          font-size: 17px;
-          letter-spacing: -0.3px;
-          color: var(--color-text-primary);
         }
 
         .btb-help-btn {
@@ -423,7 +397,6 @@ export default function BookingTopBar() {
 
         @media (max-width: 560px) {
           .btb-inner { padding: 0 16px; }
-          .btb-logo-text { font-size: 15px; }
           .btb-help-btn { padding: 7px 12px; font-size: 12.5px; }
           .btb-modal { max-height: 92vh; border-radius: var(--radius-lg); }
         }
