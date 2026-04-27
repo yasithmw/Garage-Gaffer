@@ -61,7 +61,8 @@ export default function NumberPlateTab({
         .npt-wrap {
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          justify-content: space-between;
+          height: 100%;
         }
         .npt-plate-wrap {
           display: flex;
