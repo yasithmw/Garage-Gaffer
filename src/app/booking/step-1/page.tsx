@@ -202,7 +202,7 @@ function Step1Content() {
           box-shadow: var(--shadow-sm);
         }
         .s1-panel {
-          height: 230px;
+          height: 248px;
           overflow-y: auto;
           overflow-x: hidden;
           margin-bottom: 16px;
