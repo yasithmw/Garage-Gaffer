@@ -66,16 +66,18 @@ export default function YourDetailsForm({ values, onChange }: YourDetailsFormPro
           onChange={(e) => onChange("optIn", e.target.checked)}
         />
         <span className="ydf-checkbox-text">
-          Opt in to receive MOT reminders and monthly promotions
+          Opt in to receive service reminders and monthly promotions
         </span>
       </label>
 
+      {/* Sign in prompt hidden
       <div className="ydf-signin">
         Already have an account?
         <a href="#" className="ydf-signin-link" onClick={(e) => e.preventDefault()}>
           Sign in
         </a>
       </div>
+      */}
 
       <style jsx>{`
         .ydf-wrap { display: flex; flex-direction: column; gap: 4px; }

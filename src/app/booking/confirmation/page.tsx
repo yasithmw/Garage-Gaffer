@@ -23,7 +23,7 @@ export default function ConfirmationPage() {
   const total = session?.selectedWork.reduce((acc, i) => acc + i.price, 0) ?? 0;
   const car = session?.car;
   const vehicleLabel = car
-    ? [car.make, car.model, car.engineCapacity, car.year].filter(Boolean).join(" ") || car.reg || "Your vehicle"
+    ? [car.make, car.model].filter(Boolean).join(" ") || car.reg || "Your vehicle"
     : "";
 
   return (

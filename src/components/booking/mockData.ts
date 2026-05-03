@@ -156,16 +156,6 @@ export type ServicingOption = {
 
 export const SERVICING_OPTIONS: ServicingOption[] = [
   {
-    id: "s-mot",
-    name: "MOT with Collection & Delivery",
-    description: "We collect your car, take it through an MOT test at an approved centre, and return it to you — all in one day.",
-    price: 49,
-    dealerPrice: 89,
-    rating: 4.9,
-    reviewCount: 3211,
-    badge: "MOST POPULAR",
-  },
-  {
     id: "s-major",
     name: "Major Service",
     description: "Full service including oil, filter, spark plugs, air filter, fuel filter, and a comprehensive 60-point check.",

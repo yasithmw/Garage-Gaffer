@@ -25,7 +25,7 @@ export default function PriceSummaryPanel({
   const savePercent = dealerTotal > 0 ? Math.round((1 - total / dealerTotal) * 100) : 0;
 
   const car = session.car;
-  const vehicleLabel = [car.make, car.model, car.engineCapacity, car.year].filter(Boolean).join(" ");
+  const vehicleLabel = [car.make, car.model].filter(Boolean).join(" ");
   const postcode = car.postcode || car.reg || "";
 
   return (

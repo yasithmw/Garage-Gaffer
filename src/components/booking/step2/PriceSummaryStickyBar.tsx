@@ -17,6 +17,7 @@ function calcTotal(items: SelectedItem[]) {
 
 export default function PriceSummaryStickyBar({
   selectedWork,
+  session,
   onRemove,
   onNextStep,
   dealerTotal,
@@ -24,6 +25,7 @@ export default function PriceSummaryStickyBar({
   const [expanded, setExpanded] = useState(false);
   const total = calcTotal(selectedWork);
   const savePercent = dealerTotal > 0 ? Math.round((1 - total / dealerTotal) * 100) : 0;
+  const vehicleLabel = [session.car.make, session.car.model].filter(Boolean).join(" ") || session.car.reg || "";
 
   return (
     <div className="pssb-outer">
@@ -38,6 +40,15 @@ export default function PriceSummaryStickyBar({
               </svg>
             </button>
           </div>
+
+          {vehicleLabel && (
+            <div className="pssb-vehicle">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="1" y="3" width="15" height="13" rx="2" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" />
+              </svg>
+              <span>{vehicleLabel}</span>
+            </div>
+          )}
 
           <div className="pssb-items">
             {selectedWork.length === 0 ? (
@@ -123,6 +134,13 @@ export default function PriceSummaryStickyBar({
           width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
           cursor: pointer; color: var(--color-text-secondary);
         }
+        .pssb-vehicle {
+          display: flex; align-items: center; gap: 6px;
+          font-size: 12px; color: var(--color-text-secondary);
+          padding: 8px 12px; background: var(--color-bg);
+          border-radius: var(--radius-md);
+        }
+        .pssb-vehicle svg { flex-shrink: 0; color: var(--color-text-disabled); }
         .pssb-items { display: flex; flex-direction: column; gap: 6px; }
         .pssb-empty { font-size: 13px; color: var(--color-text-disabled); margin: 0; }
         .pssb-item { display: flex; align-items: center; gap: 8px; }

@@ -15,7 +15,7 @@ type ServiceTab = "repairs" | "diagnostics" | "servicing";
 const TAB_LABELS: Record<ServiceTab, string> = {
   repairs: "Repairs",
   diagnostics: "Diagnostics",
-  servicing: "Servicing & MOT",
+  servicing: "Servicing",
 };
 
 function calcDealerTotal(items: SelectedItem[]): number {
@@ -112,7 +112,7 @@ function Step2Content() {
           {/* Tab content */}
           <div className="s2-tab-content">
             {activeTab === "repairs" && (
-              <RepairsTab selectedWork={selectedWork} onAdd={handleAdd} onRemove={handleRemove} />
+              <RepairsTab selectedWork={selectedWork} onAdd={handleAdd} onRemove={handleRemove} fuelType={session.car.fuelType ?? ""} />
             )}
             {activeTab === "diagnostics" && (
               <DiagnosticsTab selectedWork={selectedWork} onAdd={handleAdd} onRemove={handleRemove} />

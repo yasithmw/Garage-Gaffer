@@ -32,8 +32,8 @@ const SERVICE_CARDS = [
   },
   {
     id: "servicing" as BookingSession["service"],
-    title: "Servicing & MOT",
-    description: "Keep your car healthy with an interim service, full service, or MOT with collection.",
+    title: "Servicing",
+    description: "Keep your car healthy with an interim service, full service, or major service.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
@@ -41,7 +41,7 @@ const SERVICE_CARDS = [
     ),
     iconBg: "#E4F6F6",
     iconColor: "var(--color-accent-teal)",
-    examples: ["Interim service", "Full service", "MOT + collection"],
+    examples: ["Interim service", "Full service", "Major service"],
   },
 ];
 
