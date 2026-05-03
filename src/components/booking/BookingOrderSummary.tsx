@@ -10,7 +10,7 @@ interface BookingOrderSummaryProps {
 export default function BookingOrderSummary({ session, showTrustBadges }: BookingOrderSummaryProps) {
   const total = session.selectedWork.reduce((acc, i) => acc + i.price, 0);
   const car = session.car;
-  const vehicleLabel = [car.make, car.model, car.engineCapacity, car.year].filter(Boolean).join(" ") || car.reg || "Your vehicle";
+  const vehicleLabel = [car.make, car.model].filter(Boolean).join(" ") || car.reg || "Your vehicle";
   const postcode = car.postcode;
 
   return (

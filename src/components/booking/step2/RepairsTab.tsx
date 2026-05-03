@@ -8,12 +8,23 @@ interface RepairsTabProps {
   selectedWork: SelectedItem[];
   onAdd: (item: SelectedItem) => void;
   onRemove: (id: string) => void;
+  fuelType?: string;
 }
 
-export default function RepairsTab({ selectedWork, onAdd, onRemove }: RepairsTabProps) {
+const INCOMPATIBLE: Record<string, string[]> = {
+  Diesel: ["r-spark-plugs", "r-e-spark", "r-e-coil"],
+  Electric: [
+    "r-spark-plugs", "r-e-spark", "r-e-coil",
+    "r-clutch", "r-timing-belt", "r-e-timing", "r-e-chain",
+    "r-starter-motor", "r-el-starter", "r-alternator", "r-el-alt",
+  ],
+};
+
+export default function RepairsTab({ selectedWork, onAdd, onRemove, fuelType = "" }: RepairsTabProps) {
   const [search, setSearch] = useState("");
   const [openCategories, setOpenCategories] = useState<string[]>([]);
   const selectedIds = new Set(selectedWork.map((w) => w.id));
+  const incompatibleIds = new Set(INCOMPATIBLE[fuelType] ?? []);
 
   const filtered = search.trim()
     ? POPULAR_REPAIRS.filter((r) => r.name.toLowerCase().includes(search.toLowerCase()))
@@ -52,8 +63,9 @@ export default function RepairsTab({ selectedWork, onAdd, onRemove }: RepairsTab
         <div className="rt-list">
           {filtered.map((item) => {
             const added = selectedIds.has(item.id);
+            const disabled = incompatibleIds.has(item.id);
             return (
-              <div key={item.id} className="rt-item">
+              <div key={item.id} className={`rt-item${disabled ? " rt-item--disabled" : ""}`}>
                 <div className="rt-item-info">
                   <span className="rt-item-name">{item.name}</span>
                   <span className="rt-item-meta">
@@ -67,6 +79,7 @@ export default function RepairsTab({ selectedWork, onAdd, onRemove }: RepairsTab
                     className={`rt-item-btn${added ? " rt-item-btn--remove" : ""}`}
                     onClick={() => added ? onRemove(item.id) : onAdd(item)}
                     type="button"
+                    disabled={disabled}
                     aria-label={added ? `Remove ${item.name}` : `Add ${item.name}`}
                   >
                     {added ? "Remove" : "Add"}
@@ -111,8 +124,9 @@ export default function RepairsTab({ selectedWork, onAdd, onRemove }: RepairsTab
                         <div className="rt-list">
                           {sub.items.map((item) => {
                             const added = selectedIds.has(item.id);
+                            const disabled = incompatibleIds.has(item.id);
                             return (
-                              <div key={item.id} className="rt-item rt-item--sub">
+                              <div key={item.id} className={`rt-item rt-item--sub${disabled ? " rt-item--disabled" : ""}`}>
                                 <div className="rt-item-info">
                                   <span className="rt-item-name">{item.name}</span>
                                   <span className="rt-item-meta">
@@ -126,6 +140,7 @@ export default function RepairsTab({ selectedWork, onAdd, onRemove }: RepairsTab
                                     className={`rt-item-btn${added ? " rt-item-btn--remove" : ""}`}
                                     onClick={() => added ? onRemove(item.id) : onAdd(item)}
                                     type="button"
+                                    disabled={disabled}
                                     aria-label={added ? `Remove ${item.name}` : `Add ${item.name}`}
                                   >
                                     {added ? "Remove" : "Add"}
@@ -175,6 +190,7 @@ export default function RepairsTab({ selectedWork, onAdd, onRemove }: RepairsTab
         .rt-item:hover { background: #ECF7EF; }
         .rt-item--sub { background: #fff; border: 1px solid var(--color-divider); }
         .rt-item--sub:hover { background: #ECF7EF; }
+        .rt-item--disabled { opacity: 0.38; pointer-events: none; }
         .rt-item-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
         .rt-item-name { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
         .rt-item-meta { display: flex; gap: 10px; }

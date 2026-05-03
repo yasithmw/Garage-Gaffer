@@ -89,7 +89,7 @@ const SERVICE_CARDS: ServiceCard[] = [
     id: "servicing",
     title: "Servicing",
     description:
-      "Keep your car healthy with an interim service, full service, or MOT with collection.",
+      "Keep your car healthy with an interim service, full service, or major service.",
     icon: (
       <svg
         viewBox="0 0 48 48"

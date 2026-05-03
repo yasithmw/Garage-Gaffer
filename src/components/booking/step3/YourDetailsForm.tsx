@@ -66,7 +66,7 @@ export default function YourDetailsForm({ values, onChange }: YourDetailsFormPro
           onChange={(e) => onChange("optIn", e.target.checked)}
         />
         <span className="ydf-checkbox-text">
-          Opt in to receive MOT reminders and monthly promotions
+          Opt in to receive service reminders and monthly promotions
         </span>
       </label>
 
