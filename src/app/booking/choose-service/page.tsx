@@ -87,7 +87,7 @@ const SERVICE_CARDS: ServiceCard[] = [
   },
   {
     id: "servicing",
-    title: "Servicing & MOT",
+    title: "Servicing",
     description:
       "Keep your car healthy with an interim service, full service, or MOT with collection.",
     icon: (
@@ -267,8 +267,8 @@ export default function ChooseServicePage() {
         }
 
         .cs-card:hover {
-          border-color: #9bb8cf;
-          box-shadow: 0 6px 24px rgba(74, 127, 165, 0.13);
+          border-color: var(--color-brand-primary);
+          box-shadow: 0 6px 24px rgba(13, 122, 95, 0.13);
           transform: translateY(-3px);
         }
 
@@ -279,7 +279,7 @@ export default function ChooseServicePage() {
 
         .cs-card:active {
           transform: translateY(-1px);
-          box-shadow: 0 3px 12px rgba(74, 127, 165, 0.1);
+          box-shadow: 0 3px 12px rgba(13, 122, 95, 0.1);
         }
 
         /* ------------------------------------------------------------------ */
@@ -294,8 +294,8 @@ export default function ChooseServicePage() {
           width: 76px;
           height: 76px;
           border-radius: var(--radius-full);
-          background: #eef4fa;
-          color: #4a7fa5;
+          background: #ECF7EF;
+          color: var(--color-brand-primary);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -304,8 +304,8 @@ export default function ChooseServicePage() {
         }
 
         .cs-card:hover .cs-card-icon {
-          background: #ddeaf5;
-          color: #2d6a94;
+          background: #d6eedd;
+          color: #055240;
         }
 
         /* ------------------------------------------------------------------ */

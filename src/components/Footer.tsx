@@ -48,7 +48,7 @@ const footerLinks = [
       { label: "Become a Gaffer", href: "#" },
       { label: "How we pay", href: "#" },
       { label: "Mechanic FAQs", href: "#" },
-      { label: "Sign in", href: "#" },
+      // { label: "Sign in", href: "#" }, // hidden
     ],
   },
   {

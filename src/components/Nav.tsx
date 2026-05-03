@@ -128,9 +128,11 @@ export default function Nav() {
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-2 ml-auto">
+          {/* Sign In button hidden
           <button className="px-3.5 py-1.5 rounded-lg text-[13px] font-semibold font-[family-name:var(--font-rubik)] text-[#595C5B] hover:bg-[#F5F7F6] hover:text-[#1A1E1D] transition-colors">
             Sign In
           </button>
+          */}
           <Link href="/booking" className="px-3.5 py-1.5 rounded-lg text-[13px] font-semibold font-[family-name:var(--font-rubik)] bg-[#0D7A5F] text-white shadow-[0_2px_8px_rgba(13,122,95,0.25)] hover:bg-[#055240] hover:shadow-[0_6px_18px_rgba(13,122,95,0.3)] hover:-translate-y-px transition-all">
             Get Started
           </Link>
@@ -155,7 +157,9 @@ export default function Nav() {
           <Link href="/become-a-mechanic" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Become a Mechanic</Link>
           <Link href="/support" className="py-2 text-[15px] font-medium text-[#1A1E1D]" onClick={() => setMobileOpen(false)}>Support</Link>
           <div className="flex gap-3 mt-2 pt-2 border-t border-[#DADCDB]">
+            {/* Sign In button hidden
             <button className="flex-1 py-2.5 rounded-lg text-[14px] font-semibold text-[#595C5B] border border-[#DADCDB]">Sign In</button>
+            */}
             <Link href="/booking" className="flex-1 py-2.5 rounded-lg text-[14px] font-semibold text-center bg-[#0D7A5F] text-white" onClick={() => setMobileOpen(false)}>Get Started</Link>
           </div>
         </div>

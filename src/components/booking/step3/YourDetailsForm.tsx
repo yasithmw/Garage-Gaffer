@@ -70,12 +70,14 @@ export default function YourDetailsForm({ values, onChange }: YourDetailsFormPro
         </span>
       </label>
 
+      {/* Sign in prompt hidden
       <div className="ydf-signin">
         Already have an account?
         <a href="#" className="ydf-signin-link" onClick={(e) => e.preventDefault()}>
           Sign in
         </a>
       </div>
+      */}
 
       <style jsx>{`
         .ydf-wrap { display: flex; flex-direction: column; gap: 4px; }
